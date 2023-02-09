@@ -2,12 +2,17 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const cloudinary = require('cloudinary').v2;
+const fileUpload = require("express-fileupload");
 const app = express();
 
 //Middlewares
 dotenv.config();
 app.use(cors());
 app.use(express.json());
+app.use(fileUpload({
+  useTempFiles: true,
+  limits: {fileSize: 50 * 2024 * 1024}
+}))
 
 //Configuracion de cloudinary
 cloudinary.config({

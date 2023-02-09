@@ -1,9 +1,21 @@
+const cloudinary = require("cloudinary").v2;
 const ctrl = {};
 const Empresa = require('../models/empresas.model');
 
 /* --- --- --- --- --- --- ---  C R U D  --- --- --- --- --- --- --- */
 //Crear Empresa
 ctrl.crear = async(req, res)=>{
+    const file = req.files.img;
+
+    var result = await cloudinary.uploader.upload(file.tempFilePath, {
+        public_id: Date.now(),
+        resource_type: 'auto',
+        folder: 'empresas'
+    }).catch(err => {
+        console.log('Error: '+err);
+        result = {url: 'https://res.cloudinary.com/dnrfswnwp/image/upload/v1675969168/empresas/1675969167546.jpg'}
+    })
+
     const { 
             nombre,
             correo,
@@ -13,8 +25,7 @@ ctrl.crear = async(req, res)=>{
             folio_coti,    
             folio_ticket,
             condiciones,
-            img
-        } = req.body;
+    } = req.body;
 
     const newEmpresa = new Empresa({
         nombre,
@@ -25,7 +36,7 @@ ctrl.crear = async(req, res)=>{
         folio_coti,    
         folio_ticket,
         condiciones,
-        img
+        img: result.url
     });
 
     var error = false;
