@@ -11,7 +11,7 @@ const Item = require('../models/items.model');
 const descargarImagen = require('./descargarImagen');
 
 
-generador.cotizacion1 = async(id)=>{
+generador.cotizacion1 = async(id, callback)=>{
 
     const data = await getData(id);    
     
@@ -33,6 +33,8 @@ generador.cotizacion1 = async(id)=>{
         } catch(err) {
             console.error('Something wrong happened removing the file', err)
         }
+
+        callback();
     });
 }
 
