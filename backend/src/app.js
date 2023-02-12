@@ -32,5 +32,6 @@ app.use('/api/cliente', require('./routes/cliente.route'));
 app.use('/api/cotizacion', require('./routes/cotizacion.route'));
 app.use('/api/ticket', require('./routes/ticket.route'));
 app.use('/api/item', require('./routes/item.route'));
+app.use('/api/enviar/cotizacion', require('./routes/enviarCotizaciones.route'));
 
 module.exports = app;

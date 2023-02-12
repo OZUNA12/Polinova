@@ -7,6 +7,7 @@ ctrl.crear = async(req, res)=>{
     const { 
         id_usuario,
         id_cliente,
+        color,
         abono,
         folio,
         fecha,
@@ -25,6 +26,7 @@ ctrl.crear = async(req, res)=>{
     const newCotizacion = new Cotizacion({
         id_usuario,
         id_cliente,
+        color,
         abono,
         folio,
         fecha,
@@ -83,6 +85,7 @@ ctrl.actualizar = async(req, res)=>{
     const { 
             id_usuario,
             id_cliente,
+            color,
             abono,
             folio,
             fecha,
@@ -101,6 +104,7 @@ ctrl.actualizar = async(req, res)=>{
     const cotizacion = await Cotizacion.findByIdAndUpdate(id, {
         id_usuario,
         id_cliente,
+        color,
         abono,
         folio,
         fecha,
@@ -109,7 +113,6 @@ ctrl.actualizar = async(req, res)=>{
         iva,
         importeIva,
         descuento,
-        
         adicional,
         total,
         footer

@@ -28,13 +28,18 @@ generador.cotizacion1 = async(id)=>{
         doc.end();
         console.log(colors.red('PDF '+data.cotizacion._id+'.pdf se ha creado :)'));
 
+        try {
+            fs.unlinkSync('src/pdf/imgs/'+data.empresa._id+'.jpg');
+        } catch(err) {
+            console.error('Something wrong happened removing the file', err)
+        }
     });
 }
 
 
 function generarHeader(doc, data) {
 
-    doc.on('pageAdded', () => {altura=50});
+    doc.on('pageAdded', () => {altura=75});
 
 
     const maxAlto = 150;
@@ -47,34 +52,43 @@ function generarHeader(doc, data) {
     }
     folio+=data.cotizacion.folio;
 
-
     doc
         .image('src/pdf/imgs/'+data.empresa._id+'.jpg', 20, 20, { fit: [maxAncho, maxAlto], align: 'center'})
-        .fillColor('#000')
+        .fillColor('black')
         .fontSize(30)
         .font('Helvetica-Bold')
-        .text('Cotización', 275, 50, {align: 'center', bold: true})
+        .text('Cotización', 350, 50, {align: 'center', bold: true})
         .fontSize(20)
-        .text('Folio: ', 300, 100, {align: 'left'})
-        .text('Emitida: ', 300, 120, {align: 'left'})
+        .text('Folio: ', 350, 100, {align: 'left'})
+        .text('Emitida: ', 350, 120, {align: 'left'})
+
+        .fillColor(data.cotizacion.color)
+        .fontSize(12)
+        .text(data.cotizacion._id, 350, 138, {align: 'center'})
+        .fillColor('black')
+        .fontSize(20)
+
 
         .font('Helvetica')
-        .text(folio, 360, 100, {align: 'left'})
-        .text(data.cotizacion.fecha, 380, 120, {align: 'left'})
+        .fillColor(data.cotizacion.color)
+        .text(folio, 360, 100, {align: 'right'})
+        .text(data.cotizacion.fecha, 380, 120, {align: 'right'})
 
         .font('Helvetica-Bold')
         .fontSize(18)
-        .text(data.usuario.nombre+' '+data.usuario.apellido, 300, 238, {align: 'right'})
-
+        .text(data.usuario.nombre+' '+data.usuario.apellido, 300, 237, {align: 'right'})
+        .fillColor('black')
 
         .moveDown()
     
     doc
         .font('Helvetica-Bold')
         .fontSize(13)
+        .fillColor(data.cotizacion.color)
         .text('Atencion '+data.cliente.empresa, 50, 180, {align: 'left', bold: true})
 
         .fontSize(10)
+        .fillColor('black')
         .text('Contacto: ', 50, 195, {align: 'left'})
         .text('Telefono: ', 50, 205, {align: 'left'})
         .text('Correo: ', 50, 215, {align: 'left'})
@@ -106,6 +120,7 @@ function generarHeader(doc, data) {
     const cond = (data.cotizacion.condiciones).split('|');
     cond.map((c)=>{
         doc
+            .fillColor('#555')
             .fontSize(10)
             .text(c, 45, altura)
             
@@ -113,7 +128,9 @@ function generarHeader(doc, data) {
     });
             
 
-    doc.moveTo(beginningOfPage,altura+5)
+    doc
+        .fillColor('black')
+        .moveTo(beginningOfPage,altura+5)
         .lineTo(endOfPage,altura+5)
         .stroke()
     
@@ -124,7 +141,7 @@ function generarTabla(doc, data, alt){
     var altura = alt+20;
 
     doc.on('pageAdded', () => {
-        altura=50;
+        altura=75;
     });
 
     doc
@@ -136,15 +153,20 @@ function generarTabla(doc, data, alt){
         .text('PRECIO\nUNITARIO', 415, altura)
         .text('PRECIO\nTOTAL', 493.5, altura)
 
-        cuadradoNegro(doc, 38, altura-5, 45, 32)
-        cuadradoNegro(doc, 83, altura-5, 45, 32)
-        cuadradoNegro(doc, 128, altura-5, 284, 32)
-        cuadradoNegro(doc, 412, altura-5, 75, 32)
-        cuadradoNegro(doc, 487, altura-5, 75, 32)
+        cuadradoNegro(doc, 38, altura-5, 45, 32, data.cotizacion.color);
+        cuadradoNegro(doc, 83, altura-5, 45, 32, data.cotizacion.color);
+        cuadradoNegro(doc, 128, altura-5, 284, 32, data.cotizacion.color);
+        cuadradoNegro(doc, 412, altura-5, 75, 32, data.cotizacion.color);
+        cuadradoNegro(doc, 487, altura-5, 75, 32, data.cotizacion.color);
 
     altura+=35;
 
+    var index = 1;
     data.items.map((i)=>{
+        if(altura >= 700){
+            doc.addPage()
+        }
+        index++;
         var desc = (i.descripcion).split('|');
         var descripcion = '';
         var altCaja = 25;
@@ -154,25 +176,34 @@ function generarTabla(doc, data, alt){
             altCaja+=10;
         });
 
+        if(desc.length == 1 && doc[0]==""){
+            descripcion='';
+        }
+
         altCaja-=10;
 
         doc        
-            .fontSize(8)
+            .fontSize(9)
             .fillOpacity(1)
             .fillColor('#000')
             .font('Helvetica')
-            .text(i.cantidad ,42, altura)
+            .text(i.cantidad ,42, altura-4)
 
-            .text(i.unidad , 85, altura)
-            .text(i.articulo+'\n'+descripcion , 130, altura)
-            .text('$'+i.precioUnitario, 415, altura)
-            .text('$'+i.importe, 493.5, altura)
+            .text(i.unidad , 85, altura-4)
+            .fillColor(data.cotizacion.color)
+            .text(i.articulo, 130, altura-4)
+            .fillColor('black')
+            .fontSize(8)
+            .text(descripcion, 130, altura+9)
+            .fontSize(9)
+            .text('$'+i.precioUnitario, 415, altura-4)
+            .text('$'+i.importe, 493.5, altura-4)
 
-        cuadradoItem(doc, 38, altura-8, 45, altCaja)
-        cuadradoItem(doc, 83, altura-8, 45, altCaja)
-        cuadradoItem(doc, 128, altura-8, 284, altCaja)
-        cuadradoItem(doc, 412, altura-8, 75, altCaja)
-        cuadradoItem(doc, 487, altura-8, 75, altCaja)
+        cuadradoItem(doc, 38, altura-8, 45, altCaja, index, data.cotizacion.color);
+        cuadradoItem(doc, 83, altura-8, 45, altCaja, index, data.cotizacion.color);
+        cuadradoItem(doc, 128, altura-8, 284, altCaja, index, data.cotizacion.color);
+        cuadradoItem(doc, 412, altura-8, 75, altCaja, index, data.cotizacion.color);
+        cuadradoItem(doc, 487, altura-8, 75, altCaja, index, data.cotizacion.color);
 
         altura+=altCaja;
     });
@@ -223,9 +254,12 @@ function generarTabla(doc, data, alt){
     doc
         .font('Helvetica-Bold')
         .fontSize(20)
+        .fillColor(data.cotizacion.color)
         .text('TOTAL: ' ,350, altura)
         .font('Helvetica')
         .text('$'+data.cotizacion.total+' MXN' ,350, altura, {align: 'right'})
+        .fillColor('black')
+
 
     altura+=15;
 
@@ -253,14 +287,21 @@ function generarFooter(doc, data, alt){
         .fontSize(8)
         .text(footer, 40, altura)
 
-    altura+=(10*foot.length);
+    if(altura==50){
+        altura+=50+(10*foot.length);;
+    }else{
+        altura+=(10*foot.length);
+    }
+
 
     
     doc
         .font('Helvetica')
         .fontSize(12)
-        .text('Le atendio '+data.usuario.nombre+' '+data.usuario.apellido+ ' de ' +data.empresa.nombre, 40, altura+10)
+        .fillColor(data.cotizacion.color)
+        .text('Le atendió '+data.usuario.nombre+' '+data.usuario.apellido+ ' de ' +data.empresa.nombre, 40, altura+10)
         .fontSize(10)
+        .fillColor('black')
         .text(data.empresa.direccion, 40, altura+22)
         .text(data.empresa.telefono, 40, altura+34)
         .text(data.empresa.correo, 40, altura+46)
@@ -320,20 +361,27 @@ const getData = async(id)=>{
     return data;
 }
 
-function cuadradoNegro(doc, x, y, w, h){
+function cuadradoNegro(doc, x, y, w, h, c){
     doc
         .lineJoin('bevel')
         .rect(x, y, w, h)
-        .fillOpacity(0.33)
-        .fillAndStroke("black", "black")
+        .fillOpacity(0.5)
+        .fillAndStroke(c, "black")
 }
 
-function cuadradoItem(doc, x, y, w, h){
+function cuadradoItem(doc, x, y, w, h, index, c){
+    if(index%2 == 0){
+        var color='white';
+    }else{
+        var color=c;
+
+    }
+
     doc
         .lineJoin('bevel')
         .rect(x, y, w, h)
-        .fillOpacity(0)
-        .fillAndStroke("white", "black")
+        .fillOpacity(.10)
+        .fillAndStroke(color, "black")
 }
 
 module.exports = generador;
