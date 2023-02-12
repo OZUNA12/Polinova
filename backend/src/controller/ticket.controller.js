@@ -15,9 +15,9 @@ ctrl.crear = async(req, res)=>{
         iva,
         importeIva,
         descuento,
-        infoDescuento,
+        
         adicional,
-        infoAdicional,
+        
         total,
         footer
     } = req.body;
@@ -33,9 +33,9 @@ ctrl.crear = async(req, res)=>{
         iva,
         importeIva,
         descuento,
-        infoDescuento,
+        
         adicional,
-        infoAdicional,
+        
         total,
         footer
     });
@@ -91,9 +91,9 @@ ctrl.actualizar = async(req, res)=>{
             iva,
             importeIva,
             descuento,
-            infoDescuento,
+            
             adicional,
-            infoAdicional,
+            
             total,
             footer
         } = req.body;
@@ -109,9 +109,8 @@ ctrl.actualizar = async(req, res)=>{
         iva,
         importeIva,
         descuento,
-        infoDescuento,
+        
         adicional,
-        infoAdicional,
         total,
         footer
     }).catch(err=>{

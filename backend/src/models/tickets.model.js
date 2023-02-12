@@ -11,9 +11,7 @@ const schema = new Schema({
     iva: {type: Number, required: true},
     importeIva: {type: Number, required: true},
     descuento: {type: Number, required: true},
-    infoDescuento: {type: String, required: true},
     adicional: {type: Number, required: true},
-    infoAdicional: {type: String, required: true},
     total: {type: Number, required: true},
     footer: {type: String, required: true}
 },

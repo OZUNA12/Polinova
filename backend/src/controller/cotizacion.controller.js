@@ -8,7 +8,6 @@ ctrl.crear = async(req, res)=>{
         id_usuario,
         id_cliente,
         folio,
-        fecha,
         condiciones,
         subtotal,
         iva,
@@ -16,7 +15,6 @@ ctrl.crear = async(req, res)=>{
         descuento,
         infoDescuento,
         adicional,
-        infoAdicional,
         total,
         footer
     } = req.body;
@@ -25,7 +23,6 @@ ctrl.crear = async(req, res)=>{
         id_usuario,
         id_cliente,
         folio,
-        fecha,
         condiciones,
         subtotal,
         iva,
@@ -33,7 +30,7 @@ ctrl.crear = async(req, res)=>{
         descuento,
         infoDescuento,
         adicional,
-        infoAdicional,
+        
         total,
         footer
     });
@@ -82,7 +79,6 @@ ctrl.actualizar = async(req, res)=>{
             id_usuario,
             id_cliente,
             folio,
-            fecha,
             condiciones,
             subtotal,
             iva,
@@ -90,7 +86,7 @@ ctrl.actualizar = async(req, res)=>{
             descuento,
             infoDescuento,
             adicional,
-            infoAdicional,
+            
             total,
             footer
         } = req.body;
@@ -99,7 +95,6 @@ ctrl.actualizar = async(req, res)=>{
         id_usuario,
         id_cliente,
         folio,
-        fecha,
         condiciones,
         subtotal,
         iva,
@@ -107,7 +102,6 @@ ctrl.actualizar = async(req, res)=>{
         descuento,
         infoDescuento,
         adicional,
-        infoAdicional,
         total,
         footer
     }).catch(err=>{
