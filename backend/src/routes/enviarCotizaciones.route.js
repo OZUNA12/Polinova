@@ -20,18 +20,17 @@ const enviar = async(req, res)=>{
         await sendMail(cliente.correo, 'Cotizacion '+id, '<h1>Hola mundo</h1>', id+'.pdf', ()=>{
             try {
                 fs.unlinkSync('src/pdf/'+id+'.pdf');
+                res.json({exito: exito});
             } catch(err) {
                 console.error('Something wrong happened removing the file', err);
+                res.json({exito: false})
             }
         }).catch(err => console.log(err))
     })
     .catch(err => res.json({
         exito: false,
         error: err
-    }))
-    .then(res.json({exito: exito}))
-    
-
+    }));
     
 }
 
