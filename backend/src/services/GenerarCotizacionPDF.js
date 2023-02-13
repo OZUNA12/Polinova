@@ -26,7 +26,7 @@ generador.cotizacion1 = async(id, callback)=>{
         generarFooter(doc, data, altura);
 
         doc.end();
-        console.log(colors.red('PDF '+data.cotizacion._id+'.pdf se ha creado :)'));
+        console.log(colors.green('PDF '+data.cotizacion._id+'.pdf se ha creado :)'));
 
         try {
             fs.unlinkSync('src/pdf/imgs/'+data.empresa._id+'.jpg');

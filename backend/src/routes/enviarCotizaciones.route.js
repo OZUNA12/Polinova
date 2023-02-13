@@ -9,6 +9,8 @@ const router = Router();
 
 const enviar = async(req, res)=>{
 
+    var exito = true;
+
     const id = req.params.id;
     const cotizacion = await Cotizacion.findById(id);
     const cliente = await Cliente.findById(cotizacion.id_cliente);
@@ -19,14 +21,18 @@ const enviar = async(req, res)=>{
             try {
                 fs.unlinkSync('src/pdf/'+id+'.pdf');
             } catch(err) {
-                console.error('Something wrong happened removing the file', err)
+                console.error('Something wrong happened removing the file', err);
             }
-        });
-    });
-    
+        }).catch(err => console.log(err))
+    })
+    .catch(err => res.json({
+        exito: false,
+        error: err
+    }))
+    .then(res.json({exito: exito}))
     
 
-    res.json({exito: true});
+    
 }
 
 router.route('/:id')

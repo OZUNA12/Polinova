@@ -7,8 +7,8 @@ const transporter = nodemailer.createTransport({
     port: 465,
     secure: true,
     auth: {
-      user: 'cotiapp.dev@gmail.com',
-      pass: 'rdlccaogysizwrvs'
+      user: 'desaubv2@gmail.com',
+      pass: 'sdjuzhmionghscco'
     }
 });
 /*
