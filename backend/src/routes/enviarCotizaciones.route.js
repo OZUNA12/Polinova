@@ -12,10 +12,21 @@ const router = Router();
 const enviar = async(req, res)=>{
 
     const id = req.params.id;
-    const cotizacion = await Cotizacion.findById(id);
-    const cliente = await Cliente.findById(cotizacion.id_cliente);
-    const usuario = await Usuario.findById(cotizacion.id_usuario);
-    const empresa = await Empresa.findById(usuario.id_empresa);
+
+    var cotizacion;
+    var cliente;
+    var usuario;
+    var empresa;
+
+    try{
+        cotizacion = await Cotizacion.findById(id)
+        cliente = await Cliente.findById(cotizacion.id_cliente)
+        usuario = await Usuario.findById(cotizacion.id_usuario)
+        empresa = await Empresa.findById(usuario.id_empresa)
+    }catch(err){
+        res.json({exito: false})
+        return;
+    }
 
     const subject = 'Cotización de '+empresa.nombre;
     const html = '<h1>Cotización folio #'+cotizacion.folio+'</h1>'+
@@ -39,6 +50,7 @@ const enviar = async(req, res)=>{
 
         case 4: cotizar4(id, cotizacion, cliente, res, subject, html);
             break;
+
     }
     
 }

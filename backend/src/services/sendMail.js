@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
 
 const sendMail = async(to, subject, html, dir, callback)=>{
     const message = {
-        from: 'cotiapp.dev@gmail.com', // Sender address
+        from: 'cotiapp@hotmail.com', // Sender address
         to: to,         // List of recipients
         subject: subject, // Subject line
         html: html,
