@@ -3,11 +3,11 @@ const nodemailer = require('nodemailer');
 // Configurar el servidor SMTP
 
 const transporter = nodemailer.createTransport({
-    host: 'aspmx.l.google.com',
-    port: 25,
+    host: 'smtp.gmail.com',
+    port: 465,
     auth: {
-      user: 'cotiapp.sender@gmail.com',
-      pass: 'dbddvklzzigavyci',
+      user: process.env.userGMail,
+      pass: process.env.passGMail,
       
     }
 });
@@ -23,7 +23,7 @@ const transporter = nodemailer.createTransport({
 
 const sendMail = async(to, subject, html, dir, callback)=>{
     const message = {
-        from: 'cotiapp.sender@gmail.com', // Sender address
+        from: process.env.userGMail, // Sender address
         to: to,         // List of recipients
         subject: subject, // Subject line
         html: html,
