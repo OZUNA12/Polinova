@@ -28,8 +28,18 @@ const enviar = async(req, res)=>{
         return;
     }
 
+    
+
+    var folio = '';
+    const folioDB = (data.cotizacion.folio).split('');
+
+    for(let i = folioDB.length ; i<4; i++){
+        folio+='0';
+    }
+    folio+=cotizacion.folio;
+
     const subject = 'Cotización de '+empresa.nombre;
-    const html = '<h1>Cotización folio #'+cotizacion.folio+'</h1>'+
+    const html = '<h1>Cotización folio #'+folio+'</h1>'+
     '<h3>Hecha por: '+usuario.nombre +' '+usuario.apellido+'</h3>'+
     '<h3>El '+cotizacion.fecha+'</h3>'+
     '<br><br>'+
