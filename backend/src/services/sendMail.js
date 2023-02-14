@@ -3,8 +3,8 @@ const nodemailer = require('nodemailer');
 // Configurar el servidor SMTP
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp-relay.gmail.com',
-    port: 587,
+    host: 'aspmx.l.google.com',
+    port: 25,
     auth: {
       user: 'cotiapp.sender@gmail.com',
       pass: 'dbddvklzzigavyci',
