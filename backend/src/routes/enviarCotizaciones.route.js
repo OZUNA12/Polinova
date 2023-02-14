@@ -28,10 +28,8 @@ const enviar = async(req, res)=>{
         return;
     }
 
-    
-
     var folio = '';
-    const folioDB = (data.cotizacion.folio).split('');
+    const folioDB = (cotizacion.folio).split('');
 
     for(let i = folioDB.length ; i<4; i++){
         folio+='0';
