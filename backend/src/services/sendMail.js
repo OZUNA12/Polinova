@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
     host: 'smtp-relay.gmail.com',
-    port: 465,
+    port: 587,
     auth: {
       user: 'cotiapp.sender@gmail.com',
       pass: 'dbddvklzzigavyci',
