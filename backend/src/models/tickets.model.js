@@ -4,7 +4,6 @@ const schema = new Schema({
     id_usuario: {type: String, required: true},
     id_cliente: {type: String, required: true},
     color: {type: String, required: true},
-    abono: {type: Boolean, required: true},
     folio: {type: String, required: true},
     fecha: {type: String, required: true},
     condiciones: {type: String, required: true},
@@ -14,7 +13,9 @@ const schema = new Schema({
     descuento: {type: Number, required: true},
     adicional: {type: Number, required: true},
     total: {type: Number, required: true},
-    footer: {type: String, required: true}
+    footer: {type: String, required: true},
+    plantilla: {type: Number, required: true},
+    pago: {type: String, required: true}
 },
 {
     timestamps: true

@@ -9,15 +9,16 @@ ctrl.crear = async(req, res)=>{
         id_cliente,
         color,
         folio,
+        fecha,
         condiciones,
         subtotal,
         iva,
         importeIva,
         descuento,
-        infoDescuento,
         adicional,
         total,
-        footer
+        footer,
+        plantilla
     } = req.body;
 
     const newCotizacion = new Cotizacion({
@@ -25,15 +26,16 @@ ctrl.crear = async(req, res)=>{
         id_cliente,
         color,
         folio,
+        fecha,
         condiciones,
         subtotal,
         iva,
         importeIva,
         descuento,
-        infoDescuento,
         adicional,
         total,
-        footer
+        footer,
+        plantilla
     });
 
     var error = false;
@@ -86,10 +88,10 @@ ctrl.actualizar = async(req, res)=>{
             iva,
             importeIva,
             descuento,
-            infoDescuento,
             adicional,
             total,
-            footer
+            footer,
+            plantilla
         } = req.body;
 
     const cotizacion = await Cotizacion.findByIdAndUpdate(id, {
@@ -97,15 +99,16 @@ ctrl.actualizar = async(req, res)=>{
         id_cliente,
         color,
         folio,
+        fecha,
         condiciones,
         subtotal,
         iva,
         importeIva,
         descuento,
-        infoDescuento,
         adicional,
         total,
-        footer
+        footer,
+        plantilla
     }).catch(err=>{
         res.json(err);
         console.log("ERROR: "+err); 

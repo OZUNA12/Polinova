@@ -1,5 +1,6 @@
 const app = require('./app');
 var colors = require('colors/safe');
+const generador = require('./services/GenerarCotizacionPDF');
 
 require('./database');
 

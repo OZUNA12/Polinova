@@ -13,7 +13,8 @@ const schema = new Schema({
     descuento: {type: Number, required: true},
     adicional: {type: Number, required: true},
     total: {type: Number, required: true},
-    footer: {type: String, required: true}
+    footer: {type: String, required: true},
+    plantilla: {type: Number, required: true}
 },
 {
     timestamps: true

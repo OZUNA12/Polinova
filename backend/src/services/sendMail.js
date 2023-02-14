@@ -3,16 +3,16 @@ const nodemailer = require('nodemailer');
 // Configurar el servidor SMTP
 
 const transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
+    host: 'smtp.live.com',
     port: 465,
     secure: true,
     auth: {
-      user: 'desaubv2@gmail.com',
-      pass: 'sdjuzhmionghscco'
+      user: 'cotiapp@hotmail.com',
+      pass: 'cotiAdmin'
     }
 });
-/*
-var transporter = nodemailer.createTransport({
+
+/*var transporter = nodemailer.createTransport({
   host: "sandbox.smtp.mailtrap.io",
   port: 2525,
   auth: {
@@ -38,10 +38,10 @@ const sendMail = async(to, subject, html, dir, callback)=>{
     await transporter.sendMail(message, function(err, info) {
         if (err) {
           console.log(err.stack);
-          callback();
+          callback(false);
         } else {
           console.log(info);
-          callback();
+          callback(true);
         }
     });
 

@@ -38,7 +38,88 @@ generador.cotizacion1 = async(id, callback)=>{
     });
 }
 
+generador.cotizacion2 = async(id, callback)=>{
 
+    const data = await getData(id);    
+    
+    descargarImagen(data.empresa.img, data.empresa._id+'.jpg', function(){
+        
+        let doc = new PDFGenerator;
+
+        doc.pipe(fs.createWriteStream('src/pdf/'+data.cotizacion._id+'.pdf'));
+
+        var altura = generarHeader2(doc, data);
+        altura = generarTabla(doc, data, altura);
+        generarFooter2(doc, data, altura);
+
+        doc.end();
+        console.log(colors.green('PDF '+data.cotizacion._id+'.pdf se ha creado :)'));
+
+        try {
+            fs.unlinkSync('src/pdf/imgs/'+data.empresa._id+'.jpg');
+        } catch(err) {
+            console.error('Something wrong happened removing the file', err)
+        }
+
+        callback();
+    });
+}
+
+generador.cotizacion3 = async(id, callback)=>{
+
+    const data = await getData(id);    
+    
+    descargarImagen(data.empresa.img, data.empresa._id+'.jpg', function(){
+        
+        let doc = new PDFGenerator;
+
+        doc.pipe(fs.createWriteStream('src/pdf/'+data.cotizacion._id+'.pdf'));
+
+        var altura = generarHeader3(doc, data);
+        altura = generarTabla(doc, data, altura);
+        generarFooter(doc, data, altura);
+
+        doc.end();
+        console.log(colors.green('PDF '+data.cotizacion._id+'.pdf se ha creado :)'));
+
+        try {
+            fs.unlinkSync('src/pdf/imgs/'+data.empresa._id+'.jpg');
+        } catch(err) {
+            console.error('Something wrong happened removing the file', err)
+        }
+
+        callback();
+    });
+}
+
+generador.cotizacion4 = async(id, callback)=>{
+
+    const data = await getData(id);    
+    
+    descargarImagen(data.empresa.img, data.empresa._id+'.jpg', function(){
+        
+        let doc = new PDFGenerator;
+
+        doc.pipe(fs.createWriteStream('src/pdf/'+data.cotizacion._id+'.pdf'));
+
+        var altura = generarHeader4(doc, data);
+        altura = generarTabla(doc, data, altura);
+        generarFooter2(doc, data, altura);
+
+        doc.end();
+        console.log(colors.green('PDF '+data.cotizacion._id+'.pdf se ha creado :)'));
+
+        try {
+            fs.unlinkSync('src/pdf/imgs/'+data.empresa._id+'.jpg');
+        } catch(err) {
+            console.error('Something wrong happened removing the file', err)
+        }
+
+        callback();
+    });
+}
+
+//Plantilla 1
 function generarHeader(doc, data) {
 
     doc.on('pageAdded', () => {altura=75});
@@ -87,7 +168,7 @@ function generarHeader(doc, data) {
         .font('Helvetica-Bold')
         .fontSize(13)
         .fillColor(data.cotizacion.color)
-        .text('Atencion '+data.cliente.empresa, 50, 180, {align: 'left', bold: true})
+        .text(data.cliente.empresa, 50, 180, {align: 'left', bold: true})
 
         .fontSize(10)
         .fillColor('black')
@@ -244,7 +325,7 @@ function generarTabla(doc, data, alt){
             .font('Helvetica-Bold')
             .text('Adicional: ' ,350, altura)
             .font('Helvetica')
-            .text('$'+data.cotizacion.adicional+' MXN' ,350, altura, {align: 'right'})
+            .text('+$'+data.cotizacion.adicional+' MXN' ,350, altura, {align: 'right'})
         altura+=15;
     }
     altura+=10;
@@ -268,15 +349,10 @@ function generarTabla(doc, data, alt){
     return altura;        
 }
 
-
 function generarFooter(doc, data, alt){
     var altura = alt+50;
 
     doc.on('pageAdded', () => {altura=50});
-
-    doc.moveTo(40,altura-3)
-        .lineTo(580,altura-3)
-        .stroke()
 
     const foot = (data.cotizacion.footer).split('|');
     var footer = '';
@@ -295,7 +371,9 @@ function generarFooter(doc, data, alt){
         altura+=(10*foot.length);
     }
 
-
+    doc.moveTo(28,altura+5)
+    .lineTo(560,altura)
+    .stroke()
     
     doc
         .font('Helvetica')
@@ -312,6 +390,369 @@ function generarFooter(doc, data, alt){
     
 }
 
+//Plantilla 2
+function generarHeader2(doc, data) {
+
+    doc.on('pageAdded', () => {altura=75});
+
+
+    const maxAlto = 150;
+    const maxAncho = 250;
+    var folio = '';
+    const folioDB = (data.cotizacion.folio).split('');
+
+    for(let i = folioDB.length ; i<4; i++){
+        folio+='0';
+    }
+    folio+=data.cotizacion.folio;
+
+    doc
+        .image('src/pdf/imgs/'+data.empresa._id+'.jpg', 20, 20, { fit: [maxAncho, maxAlto], align: 'center'})
+        .fillColor('black')
+        .fontSize(30)
+        .font('Helvetica-Bold')
+        .text('Cotización', 350, 50, {align: 'center', bold: true})
+        .fontSize(20)
+        .text('Folio: ', 350, 100, {align: 'left'})
+        .text('Emitida: ', 350, 120, {align: 'left'})
+
+        .fillColor(data.cotizacion.color)
+        .fontSize(12)
+        .text(data.cotizacion._id, 350, 138, {align: 'center'})
+        .fillColor('black')
+        .fontSize(20)
+
+
+        .font('Helvetica')
+        .fillColor(data.cotizacion.color)
+        .text(folio, 360, 100, {align: 'right'})
+        .text(data.cotizacion.fecha, 380, 120, {align: 'right'})
+
+            
+    doc
+        .font('Helvetica-Bold')
+        .fontSize(13)
+        .fillColor(data.cotizacion.color)
+        .text(data.cliente.empresa, 50, 180, {align: 'left', bold: true})
+
+        .fontSize(10)
+        .fillColor('black')
+        .text('Contacto: ', 50, 195, {align: 'left'})
+        .text('Telefono: ', 50, 205, {align: 'left'})
+        .text('Correo: ', 50, 215, {align: 'left'})
+
+        
+        .font('Helvetica')
+        .fontSize(10)
+        .text(data.cliente.nombre, 98, 195, {align: 'left'})
+        .text(data.cliente.telefono, 96, 205, {align: 'left'})
+        .text(data.cliente.correo, 89, 215, {align: 'left'})
+
+
+    var altura = 230;
+        doc
+        .font('Helvetica-Bold')
+        .fontSize(12)
+        .fillColor(data.cotizacion.color)
+        .text('Le atiende '+data.usuario.nombre+' '+data.usuario.apellido+ ' de ' +data.empresa.nombre, 50, altura+10)
+        .fontSize(10)
+        .fillColor('black')
+        .text(data.empresa.direccion, 50, altura+22)
+        .text(data.empresa.telefono, 50, altura+34)
+        .text(data.empresa.correo, 50, altura+46)
+        .text(data.empresa.pagina, 50, altura+58, {link: data.empresa.pagina, underline: true})
+
+    altura+=80;
+
+
+
+    const beginningOfPage = 40
+    const endOfPage = 560
+
+    doc
+        .fontSize(15)
+        .font('Helvetica-Bold')
+        .text('Condiciones de venta:', 40, altura, {bold: true})
+        .font('Helvetica')
+
+
+    doc.moveTo(beginningOfPage,altura-10)
+        .lineTo(endOfPage,altura-10)
+        .stroke()
+
+    altura+=15;
+
+    
+    const cond = (data.cotizacion.condiciones).split('|');
+    cond.map((c)=>{
+        doc
+            .fillColor('#555')
+            .fontSize(10)
+            .text(c, 45, altura)
+            
+        altura+=12;
+    });
+            
+
+    doc
+        .fillColor('black')
+        .moveTo(beginningOfPage,altura+5)
+        .lineTo(endOfPage,altura+5)
+        .stroke()
+    
+    return altura;
+}
+
+function generarFooter2(doc, data, alt){
+    var altura = alt+50;
+
+    doc.on('pageAdded', () => {altura=50});
+
+    const foot = (data.cotizacion.footer).split('|');
+    var footer = '';
+    foot.map((f)=>{
+        footer+=f+'\n';
+    });
+
+    doc
+        .moveTo(28,altura+5)
+        .lineTo(560,altura+5)
+        .stroke()
+    altura+=10;
+
+    doc
+        .font('Helvetica')
+        .fontSize(8)
+        .text(footer, 40, altura)
+
+    if(altura==50){
+        altura+=50+(10*foot.length);;
+    }else{
+        altura+=(10*foot.length);
+    }
+
+
+    return altura;
+}
+
+//Plantilla 3
+function generarHeader3(doc, data) {
+
+    doc.on('pageAdded', () => {altura=75});
+
+
+    const maxAlto = 150;
+    const maxAncho = 250;
+    var folio = '';
+    const folioDB = (data.cotizacion.folio).split('');
+
+    for(let i = folioDB.length ; i<4; i++){
+        folio+='0';
+    }
+    folio+=data.cotizacion.folio;
+
+    doc
+        .image('src/pdf/imgs/'+data.empresa._id+'.jpg', 20, 20, { fit: [maxAncho, maxAlto], align: 'center'})
+        .fillColor('black')
+        .fontSize(30)
+        .font('Helvetica-Bold')
+        .text('Cotización', 350, 50, {align: 'center', bold: true})
+        .fontSize(20)
+        .text('Folio: ', 50, 180, {align: 'left'})
+        .text('Emitida: ', 50, 200, {align: 'left'})
+
+        .fillColor(data.cotizacion.color)
+        .fontSize(12)
+        .text(data.cotizacion._id, 50, 218)
+        .fillColor('black')
+        .fontSize(20)
+
+
+        .font('Helvetica')
+        .fillColor(data.cotizacion.color)
+        .text(folio, 110, 180)
+        .text(data.cotizacion.fecha, 130, 200)
+
+        .font('Helvetica-Bold')
+        .fontSize(18)
+        .text(data.usuario.nombre+' '+data.usuario.apellido, 300, 237, {align: 'right'})
+        .fillColor('black')
+
+        .moveDown()
+    
+    doc
+        .font('Helvetica-Bold')
+        .fontSize(13)
+        .fillColor(data.cotizacion.color)
+        .text(data.cliente.empresa,350, 100, {align: 'left', bold: true})
+
+        .fontSize(10)
+        .fillColor('black')
+        .text('Contacto: ', 350, 115, {align: 'left'})
+        .text('Telefono: ', 350, 125, {align: 'left'})
+        .text('Correo: ', 350, 135, {align: 'left'})
+
+        
+        .font('Helvetica')
+        .fontSize(10)
+        .text(data.cliente.nombre, 398, 115, {align: 'left'})
+        .text(data.cliente.telefono, 396, 125, {align: 'left'})
+        .text(data.cliente.correo, 389, 135, {align: 'left'})
+
+
+    const beginningOfPage = 40
+    const endOfPage = 560
+
+    doc
+        .fontSize(15)
+        .font('Helvetica-Bold')
+        .text('Condiciones de venta:', 40, 240, {bold: true})
+        .font('Helvetica')
+
+
+    doc.moveTo(beginningOfPage,253)
+        .lineTo(endOfPage,255)
+        .stroke()
+
+    var altura = 260;
+    
+    const cond = (data.cotizacion.condiciones).split('|');
+    cond.map((c)=>{
+        doc
+            .fillColor('#555')
+            .fontSize(10)
+            .text(c, 45, altura)
+            
+        altura+=12;
+    });
+            
+
+    doc
+        .fillColor('black')
+        .moveTo(beginningOfPage,altura+5)
+        .lineTo(endOfPage,altura+5)
+        .stroke()
+    
+    return altura;
+}
+
+//Plantilla4
+function generarHeader4(doc, data) {
+
+
+    doc.on('pageAdded', () => {altura=75});
+
+
+    const maxAlto = 150;
+    const maxAncho = 250;
+    var folio = '';
+    const folioDB = (data.cotizacion.folio).split('');
+
+    for(let i = folioDB.length ; i<4; i++){
+        folio+='0';
+    }
+    folio+=data.cotizacion.folio;
+
+    doc
+        .image('src/pdf/imgs/'+data.empresa._id+'.jpg', 20, 20, { fit: [maxAncho, maxAlto], align: 'center'})
+        .fillColor('black')
+        .fontSize(30)
+        .font('Helvetica-Bold')
+        .text('Cotización', 350, 50, {align: 'center', bold: true})
+        .fontSize(20)
+        .text('Folio: ', 50, 180, {align: 'left'})
+        .text('Emitida: ', 50, 200, {align: 'left'})
+
+        .fillColor(data.cotizacion.color)
+        .fontSize(12)
+        .text(data.cotizacion._id, 50, 218)
+        .fillColor('black')
+        .fontSize(20)
+
+
+        .font('Helvetica')
+        .fillColor(data.cotizacion.color)
+        .text(folio, 110, 180)
+        .text(data.cotizacion.fecha, 130, 200)
+        .fillColor('black')
+
+        .moveDown()
+    
+    doc
+        .font('Helvetica-Bold')
+        .fontSize(13)
+        .fillColor(data.cotizacion.color)
+        .text(data.cliente.empresa,350, 100, {align: 'left', bold: true})
+
+        .fontSize(10)
+        .fillColor('black')
+        .text('Contacto: ', 350, 115, {align: 'left'})
+        .text('Telefono: ', 350, 125, {align: 'left'})
+        .text('Correo: ', 350, 135, {align: 'left'})
+
+        
+        .font('Helvetica')
+        .fontSize(10)
+        .text(data.cliente.nombre, 398, 115, {align: 'left'})
+        .text(data.cliente.telefono, 396, 125, {align: 'left'})
+        .text(data.cliente.correo, 389, 135, {align: 'left'})
+
+
+    var altura = 230;
+        doc
+        .font('Helvetica-Bold')
+        .fontSize(12)
+        .fillColor(data.cotizacion.color)
+        .text('Le atiende '+data.usuario.nombre+' '+data.usuario.apellido+ ' de ' +data.empresa.nombre, 50, altura+10)
+        .fontSize(10)
+        .fillColor('black')
+        .text(data.empresa.direccion, 50, altura+22)
+        .text(data.empresa.telefono, 50, altura+34)
+        .text(data.empresa.correo, 50, altura+46)
+        .text(data.empresa.pagina, 50, altura+58, {link: data.empresa.pagina, underline: true})
+
+    altura+=80;
+
+
+
+    const beginningOfPage = 40
+    const endOfPage = 560
+
+    doc
+        .fontSize(15)
+        .font('Helvetica-Bold')
+        .text('Condiciones de venta:', 40, altura, {bold: true})
+        .font('Helvetica')
+
+
+    doc.moveTo(beginningOfPage,altura-10)
+        .lineTo(endOfPage,altura-10)
+        .stroke()
+
+    altura+=15;
+
+    
+    const cond = (data.cotizacion.condiciones).split('|');
+    cond.map((c)=>{
+        doc
+            .fillColor('#555')
+            .fontSize(10)
+            .text(c, 45, altura)
+            
+        altura+=12;
+    });
+            
+
+    doc
+        .fillColor('black')
+        .moveTo(beginningOfPage,altura+5)
+        .lineTo(endOfPage,altura+5)
+        .stroke()
+    
+    return altura;
+}
+
+//Generales
 const getData = async(id)=>{
 
     const cotizacion = await Cotizacion.findById(id)
