@@ -4,11 +4,12 @@ const nodemailer = require('nodemailer');
 
 const transporter = nodemailer.createTransport({
     host: 'smtp.live.com',
-    port: 465,
+    port: 25,
     secure: true,
     auth: {
       user: 'cotiapp@hotmail.com',
-      pass: 'cotiAdmin'
+      pass: 'cotiAdmin',
+      
     }
 });
 
