@@ -28,6 +28,7 @@ app.set('port', process.env.PORT || 4000);
 //Rutas
 app.use('/api/empresa', require('./routes/empresa.route'));
 app.use('/api/usuario', require('./routes/usuario.route'));
+app.use('/api/login', require('./routes/login.route'));
 app.use('/api/cliente', require('./routes/cliente.route'));
 app.use('/api/cotizacion', require('./routes/cotizacion.route'));
 app.use('/api/ticket', require('./routes/ticket.route'));

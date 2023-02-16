@@ -6,7 +6,7 @@ const schema = new Schema({
     id_empresa: {type: String, required: true},
     correo: {type: String, required: true},
     telefono: {type: String, required: true},
-    contraseña: {type: String, required: true},
+    password: {type: String, required: true},
     dios: {type: Boolean, required: false},
     admin: {type: Boolean, required: true},
     moderador: {type: Boolean, required: true},

@@ -1,4 +1,5 @@
 const ctrl = {};
+const bcrypt = require("bcryptjs");
 const Usuario = require('../models/usuarios.model');
 
 /* --- --- --- --- --- --- ---  C R U D  --- --- --- --- --- --- --- */
@@ -10,7 +11,7 @@ ctrl.crear = async(req, res)=>{
             id_empresa, 
             correo, 
             telefono, 
-            contraseña, 
+            password, 
             dios, 
             admin, 
             moderador, 
@@ -18,31 +19,45 @@ ctrl.crear = async(req, res)=>{
             tickets 
         } = req.body;
 
-    const newUsuario = new Usuario({
-        nombre, 
-        apellido, 
-        id_empresa, 
-        correo, 
-        telefono, 
-        contraseña, 
-        dios,
-        admin, 
-        moderador, 
-        cotizaciones, 
-        tickets
+    const usuarios = await Usuario.find();
+    usuarios.map((u)=>{
+        if(u.correo == correo){
+            res.json({exito: false})
+        }else{
+            bcrypt.hash(password, 10, async(err, palabraSecretaEncriptada)=>{
+                if (err) {
+                    console.log("Error hasheando:", err);
+                    res.json({error: true})
+                } else {
+                    const newUsuario = new Usuario({
+                        nombre, 
+                        apellido, 
+                        id_empresa, 
+                        correo, 
+                        telefono, 
+                        password: palabraSecretaEncriptada, 
+                        dios,
+                        admin, 
+                        moderador, 
+                        cotizaciones, 
+                        tickets
+                    });
+                
+                    var error = false;
+                    await newUsuario.save()
+                        .catch(err => {
+                            res.json(err);
+                            console.log("ERROR: "+err); 
+                            error = true;
+                        });
+                
+                    if(!error){
+                        res.json(newUsuario);        
+                    }        
+                }
+            });
+        }
     });
-
-    var error = false;
-    await newUsuario.save()
-        .catch(err => {
-            res.json(err);
-            console.log("ERROR: "+err); 
-            error = true;
-        });
-
-    if(!error){
-        res.json(newUsuario);        
-    }
 }
 
 //Obtener todos los Usuarios
@@ -78,7 +93,7 @@ ctrl.actualizar = async(req, res)=>{
             id_empresa, 
             correo, 
             telefono, 
-            contraseña, 
+            password, 
             dios, 
             admin, 
             moderador, 
@@ -92,7 +107,7 @@ ctrl.actualizar = async(req, res)=>{
         id_empresa, 
         correo, 
         telefono, 
-        contraseña, 
+        password, 
         dios, 
         admin, 
         moderador, 
