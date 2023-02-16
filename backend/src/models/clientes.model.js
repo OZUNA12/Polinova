@@ -5,7 +5,8 @@ const schema = new Schema({
     nombre: {type: String, required: true},
     empresa: {type: String, required: true},
     correo: {type: String, required: true},
-    telefono: {type: String, required: true}
+    telefono: {type: String, required: true},
+    activo: {type: Boolean, default: true}
 },{
     timestamps: true
 });

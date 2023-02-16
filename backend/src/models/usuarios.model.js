@@ -11,7 +11,8 @@ const schema = new Schema({
     admin: {type: Boolean, required: true},
     moderador: {type: Boolean, required: true},
     cotizaciones: {type: Boolean, required: true},
-    tickets: {type: Boolean, required: true}
+    tickets: {type: Boolean, required: true},
+    activo: {type: Boolean, default: true}
 },{
     timestamps: true
 });

@@ -10,7 +10,8 @@ const schema = new Schema({
     folio_ticket: {type: Number, required: true},
     condiciones:  {type: String, required: false},
 
-    img: {type: String, required: true}
+    img: {type: String, required: true},
+    activo: {type: Boolean, default: true}
 },{
     timestamps: true
 });

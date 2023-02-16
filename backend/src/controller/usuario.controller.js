@@ -114,7 +114,9 @@ ctrl.actualizar = async(req, res)=>{
 ctrl.eliminar = async(req, res)=>{
     const id = req.params.id;
 
-    const usuario = await Usuario.findByIdAndDelete(id)
+    const usuario = await Usuario.findByIdAndUpdate(id, {
+        activo: false
+    })
         .catch(err=>{
             res.json(err);
             console.log("ERROR: "+err); 
