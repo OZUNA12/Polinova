@@ -8,7 +8,6 @@ const login = async(req, res)=>{
     var login = false;
 
     const usuarios = await Usuario.find();
-    console.log(usuarios)
     usuarios.map((u)=>{
         if(u.correo == correo){
             bcrypt.compare(password, u.password, (err, coinciden) => {
@@ -16,16 +15,22 @@ const login = async(req, res)=>{
                     res.json({
                         exito: true,
                         id: u._id
-                    })
+                    });
                 }else{
                     res.json({
                         exito: false
-                    })
+                    });
                 }
-            })
+            });
+            login = true;
         }
     });
 
+    if(!login){
+        res.json({
+            exito: false
+        });
+    }
 }
 
 router.route('/')

@@ -20,44 +20,49 @@ ctrl.crear = async(req, res)=>{
         } = req.body;
 
     const usuarios = await Usuario.find();
+    const band = true;
     usuarios.map((u)=>{
         if(u.correo == correo){
-            res.json({exito: false})
-        }else{
-            bcrypt.hash(password, 10, async(err, palabraSecretaEncriptada)=>{
-                if (err) {
-                    console.log("Error hasheando:", err);
-                    res.json({error: true})
-                } else {
-                    const newUsuario = new Usuario({
-                        nombre, 
-                        apellido, 
-                        id_empresa, 
-                        correo, 
-                        telefono, 
-                        password: palabraSecretaEncriptada, 
-                        dios,
-                        admin, 
-                        moderador, 
-                        cotizaciones, 
-                        tickets
-                    });
-                
-                    var error = false;
-                    await newUsuario.save()
-                        .catch(err => {
-                            res.json(err);
-                            console.log("ERROR: "+err); 
-                            error = true;
-                        });
-                
-                    if(!error){
-                        res.json(newUsuario);        
-                    }        
-                }
-            });
+            band = false;
+            res.json({exito: false});
         }
     });
+
+    if(band){
+        bcrypt.hash(password, 10, async(err, palabraSecretaEncriptada)=>{
+            if (err) {
+                console.log("Error hasheando:", err);
+                res.json({error: true})
+            } else {
+                const newUsuario = new Usuario({
+                    nombre, 
+                    apellido, 
+                    id_empresa, 
+                    correo, 
+                    telefono, 
+                    password: palabraSecretaEncriptada, 
+                    dios,
+                    admin, 
+                    moderador, 
+                    cotizaciones, 
+                    tickets
+                });
+            
+                var error = false;
+                await newUsuario.save()
+                    .catch(err => {
+                        res.json(err);
+                        console.log("ERROR: "+err); 
+                        error = true;
+                    });
+            
+                if(!error){
+                    res.json(newUsuario);        
+                }        
+            }
+        });
+    }
+
 }
 
 //Obtener todos los Usuarios
