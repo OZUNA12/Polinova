@@ -1,4 +1,7 @@
 import React, { useEffect } from 'react'
+import LoadingOverlay from 'react-loading-overlay';
+
+import '../styles/Loading.css'
 
 const Logout = () => {
 
@@ -11,9 +14,13 @@ const Logout = () => {
     })
 
     return (
-        <div>
-            <h1>Cerrando sesion...</h1>
-        </div>
+        <LoadingOverlay
+            className='loading'
+            active={true}
+            spinner
+            text='Cerrando sesión...'
+        >
+        </LoadingOverlay>
     )
 }
 

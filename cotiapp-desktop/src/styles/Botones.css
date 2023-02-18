@@ -4,7 +4,7 @@
     height: max-content;
     background-color: #DC1F49;
     border-radius: 5px;
-    border: 1.5px solid #961531;
+    border: 2px solid #DC1F49;
     cursor: pointer;
     font-size: 15px;
     color: white;
@@ -12,4 +12,5 @@
 
 .boton1:hover{
     background-color: #ca1d42;
+    border: 2px solid #ca1d42;
 }

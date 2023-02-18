@@ -1,15 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import sweetalert2 from 'sweetalert2';
 import backend from '../constants';
 import Titulo from '../components/Titulo';
-import Subtitulo from '../components/Subtitulo';
 import Boton1 from '../components/Boton1';
 import Label from '../components/Label';
+
+import ojoAbierto from '../assets/ojo.png';
+import ojoCerrado from '../assets/no-ojo.png';
 
 import '../styles/Login.css'
 
 const Login = () => {
+
+    const [visible, setVisible] = useState(false);
 
     useEffect(()=>{
         const isLogged = ()=>{
@@ -19,13 +23,39 @@ const Login = () => {
         }
 
         isLogged();
-
-        const height = window.innerHeight;
-    console.log(height);
     });
 
-    
+    const forgotPassword = ()=>{
+        sweetalert2.fire({
+            title: ':(',
+            text: 'Contacta con el administrador en tu empresa para que reestablezca tu contraseña',
+            color: 'black',
+            footer: '<p>Si eres el administrador, contacta a soporte en este correo: <a href="mailto:cotiapp.dev@gmail.com">cotiapp.dev@gmail.com</a></p>',
+            confirmButtonText: 'Aceptar',
+            confirmButtonColor: '#F5305C'
+        })
+    }
 
+    const btnOjo = ()=>{
+        if(visible){
+            return <img src={ojoCerrado} className='img-login-ojo' alt='' onClick={passVisible}/>
+        }else{
+            return <img src={ojoAbierto} className='img-login-ojo' alt='' onClick={passVisible}/>
+        }
+    }
+
+    const passVisible = ()=>{
+        
+        const password = document.getElementById('password');
+        
+        if(visible){
+            setVisible(false);
+            password.setAttribute('type', 'password');
+        }else{
+            setVisible(true);
+            password.setAttribute('type', 'text');
+        }
+    }
 
     const login = async(e)=>{
         e.preventDefault();
@@ -44,9 +74,13 @@ const Login = () => {
         }else{
             sweetalert2.fire({
                 icon: 'error',
+                iconColor: 'red',
                 title: 'Error al iniciar sesión',
                 text: 'Correo y/o contraseña incorrectos',
-                footer: 'Si has olvidado tu contraseña contacta con el administrador en tu empresa'
+                color: 'black',
+                footer: 'Si has olvidado tu contraseña contacta con el administrador en tu empresa',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#F5305C'
             })
             
         }
@@ -71,19 +105,27 @@ const Login = () => {
                     
                 <div className='div-input-login'>
                     <Label htmlFor='password'>Contraseña:</Label>
-                    <input
-                        className='input-login'
-                        id='password'
-                        type='password'
-                        placeholder='Contraseña'
-                        minLength='6'
-                        required
-                    />
+                    <div className='div-input-login-ojito'>
+                        <input
+                            className='input-login'
+                            id='password'
+                            type='password'
+                            placeholder='Contraseña'
+                            minLength='6'
+                            required
+                        />
+                        {btnOjo()}
+                    </div>
                 </div>
+
 
                 <br/>
                 <Boton1>Iniciar Sesión</Boton1>
-                <br/><br/>
+                <p
+                    className='p-forgot'
+                    onClick={forgotPassword}
+                >Olvidé mi contraseña</p>
+                <br/>
             </form>
         </div>
     )

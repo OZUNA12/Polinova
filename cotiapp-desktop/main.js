@@ -5,10 +5,10 @@ const path = require('path')
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 500,
-    minWidth: 800,
-    minHeight: 500,
+    width: 850,
+    height: 550,
+    minWidth: 850,
+    minHeight: 550,
     title: 'CotiApp',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')

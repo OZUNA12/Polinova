@@ -1,0 +1,101 @@
+.div-usuario-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.div-info-personal{
+    border-radius: 10px;
+    background-color: #63CCD1;
+    width: 80%;
+
+    display: flex;
+}
+
+.div-info-personal-texto{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    padding-left: 15px;
+    width: 82%;
+}
+
+.h3-info-nombre{
+    font-size: 20px;
+    margin: 0px;
+    padding-bottom: 5px;
+
+    cursor: default;
+}
+
+.p-info-usuario{
+    font-size: 15px;
+    margin: 0px;
+
+    cursor: default;
+}
+
+.img-info-usuario{
+    padding: 15px;
+    width: 80px;
+    object-fit: contain;
+    display: block;
+
+    cursor: pointer;
+}
+
+.img-info-empresa{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.div-info-empresa-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25%;
+}
+
+.div-info-empresa-texto{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    padding-left: 15px;
+    width: 65%;
+}
+
+.div-info-empresa-btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 10%;
+}
+
+.div-info-usuario-btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 10%;
+}
+
+.img-info-editar{
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    display: block;
+    cursor: pointer;
+
+    right: 20px;
+}
+
+.img-info-editar:hover{
+    filter: invert(.3);
+}
+

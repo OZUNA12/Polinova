@@ -4,16 +4,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .form-login{
-    width: 40%;
+    width: 450px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     background-color: #04BEC7;
     border-radius: 10px;
+    box-shadow: -7px 7px rgba(0, 0, 0, 0.25);
+
 }
 
 .div-input-login{
@@ -26,9 +29,37 @@
 }
 
 .input-login{
-    width: 100%;
+    width: 360px;
     height: 22px;
     font-size: 15px;
     border: 0px;
     border-radius: 5px;
+}
+
+.p-forgot{
+    font-size: 15px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.p-forgot:hover{
+    color: #535353;
+}
+
+.img-login-ojo{
+    width: 20px;
+    display: block;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.img-login-ojo:hover{
+    filter: invert(.3);
+}
+
+.div-input-login-ojito{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 }

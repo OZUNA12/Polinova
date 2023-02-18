@@ -17,7 +17,7 @@ function App() {
           <Route path='/' element={<LoggedRoute><Index/></LoggedRoute>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/logout' element={<Logout/>}/>
-          <Route path='/usuario' element={<Usuario/>}/>
+          <Route path='/usuario' element={<LoggedRoute><Usuario/></LoggedRoute>}/>
 
 
         </Routes>

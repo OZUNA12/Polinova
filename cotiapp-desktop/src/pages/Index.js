@@ -4,6 +4,8 @@ import axios from 'axios';
 import backend from '../constants';
 import AgregarCliente from '../components/AgregarCliente';
 import CrearCotizacion from '../components/CrearCotizacion';
+import Loading from '../components/Loading';
+
 
 const Index = () => {
 
@@ -18,15 +20,21 @@ const Index = () => {
         getUsuario();
       }
     });
+    
+    if(usuario._id === undefined){
+      return <Loading/>
+    }else{
+      return (
+        <div>
+            <Titulo>Hola {usuario.nombre}</Titulo>
+  
+            <CrearCotizacion/>
+            <AgregarCliente/>
+        </div>
+      )
+    }
 
-    return (
-      <div>
-          <Titulo>Hola {usuario.nombre}</Titulo>
-
-          <CrearCotizacion/>
-          <AgregarCliente/>
-      </div>
-    )
+    
 }
 
 export default Index
