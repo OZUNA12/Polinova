@@ -10,6 +10,8 @@ function createWindow () {
     minWidth: 850,
     minHeight: 550,
     title: 'CotiApp',
+    autoHideMenuBar: true,
+    icon: './src/assets/cotiapp-icono-t.png',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
