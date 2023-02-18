@@ -25,6 +25,7 @@ ctrl.crear = async(req, res)=>{
             folio_coti,    
             folio_ticket,
             condiciones,
+            footer
     } = req.body;
 
     const newEmpresa = new Empresa({
@@ -36,6 +37,7 @@ ctrl.crear = async(req, res)=>{
         folio_coti,    
         folio_ticket,
         condiciones,
+        footer,
         img: result.url
     });
 
@@ -88,6 +90,7 @@ ctrl.actualizar = async(req, res)=>{
             folio_coti,    
             folio_ticket,
             condiciones,
+            footer,
             img
         } = req.body;
 
@@ -100,6 +103,7 @@ ctrl.actualizar = async(req, res)=>{
         folio_coti,    
         folio_ticket,
         condiciones,
+        footer,
         img
     }).catch(err=>{
         res.json(err);
