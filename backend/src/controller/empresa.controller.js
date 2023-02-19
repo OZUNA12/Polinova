@@ -80,36 +80,65 @@ ctrl.obtenerUno = async(req, res)=>{
 
 //Actualizar Empresa
 ctrl.actualizar = async(req, res)=>{
+    const files = req.files;
     const id = req.params.id;
-    const { 
-            nombre,
-            correo,
-            telefono,
-            pagina,
-            direccion,
-            folio_coti,    
-            folio_ticket,
-            condiciones,
-            footer,
-            img
-        } = req.body;
 
-    const empresa = await Empresa.findByIdAndUpdate(id, {
+    const { 
         nombre,
         correo,
         telefono,
         pagina,
         direccion,
-        folio_coti,    
-        folio_ticket,
         condiciones,
-        footer,
-        img
-    }).catch(err=>{
-        res.json(err);
-        console.log("ERROR: "+err); 
-    });
+        footer
+    } = req.body;
+        const empresa = await Empresa.findByIdAndUpdate(id, {
+            nombre,
+            correo,
+            telefono,
+            pagina,
+            direccion,
+            condiciones,
+            footer
+        }).catch(err=>{
+            res.json(err);
+            console.log("ERROR: "+err); 
+        });
+    if(files == null){
+        await Empresa.findByIdAndUpdate(req.params.id, {
+            nombre,
+            correo,
+            telefono,
+            pagina,
+            direccion,
+            condiciones,
+            footer
+        }).catch(err=>{
+            res.json(err);
+            console.log("ERROR: "+err); 
+        });
+    }else{
+        const result = await cloudinary.uploader.upload(files.img.tempFilePath, {
+            public_id: Date.now(),
+            resource_type: 'auto',
+            folder: 'empresas'
+        });
 
+        await Empresa.findByIdAndUpdate(req.params.id, {
+            nombre,
+            correo,
+            telefono,
+            pagina,
+            direccion,
+            condiciones,
+            footer,
+            img: result.url
+        }).catch(err=>{
+            res.json(err);
+            console.log("ERROR: "+err); 
+        });
+    }
+    
     if(empresa === null){
         res.json({message: 'No se encontro el registro'});
     }else{

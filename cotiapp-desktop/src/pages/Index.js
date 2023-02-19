@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Titulo from '../components/Titulo';
 import axios from 'axios';
+import sweetalert2 from 'sweetalert2';
 import backend from '../constants';
 import AgregarCliente from '../components/AgregarCliente';
 import CrearCotizacion from '../components/CrearCotizacion';
@@ -12,7 +13,22 @@ const Index = () => {
     const [usuario, setUsuario] = useState({});
     useEffect(()=>{
       const getUsuario = async()=>{
-        const {data} = await axios.get(backend()+'/api/usuario/'+localStorage.getItem('id'));
+        const {data} = await axios.get(backend()+'/api/usuario/'+localStorage.getItem('id'))
+          .catch((err)=>{
+              console.log(err)
+              sweetalert2.fire({
+                  icon: 'error',
+                  iconColor: 'red',
+                  title: 'ERROR: '+err.message,
+                  text: 'Ha ocurrido un error al conectar con el servidor. Verifique su conexion a internet',
+                  color: 'black',
+                  footer: '<p>Si el problema persiste reporte el error al correo: <a href="mailto:cotiapp.dev@gmail.com">cotiapp.dev@gmail.com</a></p>',
+                  confirmButtonText: 'Aceptar',
+                  confirmButtonColor: '#F5305C'
+              })
+
+              return;
+          })
         setUsuario(data);
       }
 

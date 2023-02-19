@@ -22,13 +22,43 @@ const Usuario = () => {
     const [empresa, setEmpresa] = useState({});
 
     const getEmpresa = async()=>{
-      const {data} = await axios.get(backend()+'/api/empresa/'+usuario.id_empresa);
+      const {data} = await axios.get(backend()+'/api/empresa/'+usuario.id_empresa)
+        .catch((err)=>{
+          console.log(err)
+          sweetalert2.fire({
+              icon: 'error',
+              iconColor: 'red',
+              title: 'ERROR: '+err.message,
+              text: 'Ha ocurrido un error al conectar con el servidor. Verifique su conexion a internet',
+              color: 'black',
+              footer: '<p>Si el problema persiste reporte el error al correo: <a href="mailto:cotiapp.dev@gmail.com">cotiapp.dev@gmail.com</a></p>',
+              confirmButtonText: 'Aceptar',
+              confirmButtonColor: '#F5305C'
+          })
+
+          return;
+        })
       setEmpresa(data);
     }
     
     useEffect(()=>{
       const getUsuario = async()=>{
-        const {data} = await axios.get(backend()+'/api/usuario/'+localStorage.getItem('id'));
+        const {data} = await axios.get(backend()+'/api/usuario/'+localStorage.getItem('id'))
+          .catch((err)=>{
+            console.log(err)
+            sweetalert2.fire({
+                icon: 'error',
+                iconColor: 'red',
+                title: 'ERROR: '+err.message,
+                text: 'Ha ocurrido un error al conectar con el servidor. Verifique su conexion a internet',
+                color: 'black',
+                footer: '<p>Si el problema persiste reporte el error al correo: <a href="mailto:cotiapp.dev@gmail.com">cotiapp.dev@gmail.com</a></p>',
+                confirmButtonText: 'Aceptar',
+                confirmButtonColor: '#F5305C'
+            })
+
+            return;
+          })
         setUsuario(data);
       }
 
@@ -65,8 +95,8 @@ const Usuario = () => {
           sweetalert2.fire({
             icon: 'question',
             iconColor: '#FFBF00',
-            title: 'Dios',
-            text: 'Eres un Dios okno, tienes acceso total al sistema',
+            title: 'Desarrollador',
+            text: 'Eres un Desarrollador, tienes acceso total al sistema',
             color: 'black',
             confirmButtonText: 'Aceptar',
             confirmButtonColor: '#F5305C'
@@ -114,15 +144,15 @@ const Usuario = () => {
     }
 
     const btnEditarEmpresa = ()=>{
-      if(usuario.dios || usuario.admin || usuario.moderador){
-        return <img src={imgEditar} className='img-info-editar' alt='' onClick={editarEmpresa}/>
-      }else{
-        return <div></div>
-      }
+    if(usuario.dios || usuario.admin){
+      return <img src={imgEditar} className='img-info-editar' alt='' onClick={editarEmpresa}/>
+    }else{
+      return <div></div>
     }
-
-    const btnEditarUsuario = ()=>{
-      if(usuario.dios || usuario.admin){
+  }
+  
+  const btnEditarUsuario = ()=>{
+        if(usuario.dios || usuario.admin || usuario.moderador){
         return <img src={imgEditar} className='img-info-editar' alt='' onClick={editarUsuario}/>
       }else{
         return <div></div>
@@ -156,7 +186,7 @@ const Usuario = () => {
               </div>
               <div className='div-info-usuario-btns'>
                 {
-                  btnEditarEmpresa()
+                  btnEditarUsuario()
                 }
               </div>
             </div>
@@ -178,7 +208,7 @@ const Usuario = () => {
               </div>
               <div className='div-info-empresa-btns'>
                 {
-                  btnEditarUsuario()
+                  btnEditarEmpresa()
                 }
               </div>
             </div>

@@ -60,6 +60,9 @@ const Login = () => {
     const login = async(e)=>{
         e.preventDefault();
 
+        document.getElementById('btn1').disabled = true;
+        
+
         const correo = document.getElementById('correo').value;
         const password = document.getElementById('password').value;
 
@@ -67,11 +70,29 @@ const Login = () => {
         formData.append('correo', correo);
         formData.append('password', password);
 
-        const {data} = await axios.post(backend()+'/api/login', formData);
+        const {data} = await axios.post(backend()+'/api/login', formData)
+            .catch((err)=>{
+                console.log(err)
+                sweetalert2.fire({
+                    icon: 'error',
+                    iconColor: 'red',
+                    title: 'ERROR: '+err.message,
+                    text: 'Ha ocurrido un error al conectar con el servidor. Verifique su conexion a internet',
+                    color: 'black',
+                    footer: '<p>Si el problema persiste reporte el error al correo: <a href="mailto:cotiapp.dev@gmail.com">cotiapp.dev@gmail.com</a></p>',
+                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: '#F5305C'
+                })
+
+                document.getElementById('btn1').disabled = false;
+                return;
+            })
         if(data.exito){
             localStorage.setItem('id', data.id);
             window.location.href = '/';
         }else{
+            document.getElementById('btn1').disabled = false;
+
             sweetalert2.fire({
                 icon: 'error',
                 iconColor: 'red',
@@ -120,7 +141,7 @@ const Login = () => {
 
 
                 <br/>
-                <Boton1>Iniciar Sesión</Boton1>
+                <button className='boton1' id='btn1'>Iniciar Sesión</button>
                 <p
                     className='p-forgot'
                     onClick={forgotPassword}
