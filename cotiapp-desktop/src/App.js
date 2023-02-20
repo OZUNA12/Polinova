@@ -10,6 +10,7 @@ import LoggedRoute from './routes/LoggedRoute';
 import DiosRoute from './routes/DiosRoute';
 import AdminRoute from './routes/AdminRoute';
 import ModeradorRoute from './routes/ModeradorRoute';
+import EditarUsuario from './pages/EditarUsuario';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path='/logout' element={<Logout/>}/>
           <Route path='/usuario' element={<LoggedRoute><Usuario/></LoggedRoute>}/>
           <Route path='/editar/empresa' element={<AdminRoute><EditarEmpresa/></AdminRoute>}/>
+          <Route path='/editar/usuario' element={<EditarUsuario/>}/>
 
 
 

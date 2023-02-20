@@ -84,8 +84,9 @@
     max-height: 200px;
     border: 2px black solid;
     border-radius: 5px;
-    background-color: aliceblue;
+    background-color: white;
     object-fit: contain;
+    cursor: pointer;
 }
 .div-editar-empresa-label-p{
     display: flex;
@@ -98,4 +99,8 @@
 
 .label-p-editar-empresa{
     margin-left: 7px;
+}
+
+p{
+    cursor: default;
 }

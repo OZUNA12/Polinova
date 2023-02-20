@@ -96,7 +96,6 @@ ctrl.actualizar = async(req, res)=>{
             nombre, 
             apellido, 
             id_empresa, 
-            correo, 
             telefono, 
             password, 
             dios, 
@@ -105,14 +104,19 @@ ctrl.actualizar = async(req, res)=>{
             cotizaciones, 
             tickets 
         } = req.body;
+        
+    var pass;
+    
+    if(password !== undefined){
+        pass = await bcrypt.hash(password, 10);
+    }
 
     const usuario = await Usuario.findByIdAndUpdate(id, {
         nombre, 
         apellido, 
         id_empresa, 
-        correo, 
         telefono, 
-        password, 
+        password: pass, 
         dios, 
         admin, 
         moderador, 

@@ -33,8 +33,38 @@ const login = async(req, res)=>{
     }
 }
 
+const comprobarPass = async(req, res)=>{
+    const {id} = req.params;
+    const {password} = req.body;
+
+    const usuario = await Usuario.findById(id)
+        .catch(err => {
+            res.json(err);
+            console.log("ERROR: "+err); 
+        });
+
+    if(usuario == null){
+        res.json({exito: false});
+    }else{
+        bcrypt.compare(password, usuario.password, (err, coinciden) => {
+            if(coinciden){
+                res.json({
+                    password: true
+                });
+            }else{
+                res.json({
+                    password: false
+                });
+            }
+        });
+    }
+
+}
+
 router.route('/')
     .post(login)
-
+    
+router.route('/:id')
+    .post(comprobarPass)
 
 module.exports = router;

@@ -6,6 +6,7 @@ import sweetalert2 from 'sweetalert2';
 import { Link } from 'react-router-dom';
 import Loading from '../components/Loading';
 import Boton1 from '../components/Boton1';
+import { PhotoProvider, PhotoView } from 'react-image-previewer';
 
 import imgUsuarioNormal from '../assets/usuario-normal.png';
 import imgUsuarioModerador from '../assets/usuario-moderador.png';
@@ -151,12 +152,8 @@ const Usuario = () => {
     }
   }
   
-  const btnEditarUsuario = ()=>{
-        if(usuario.dios || usuario.admin || usuario.moderador){
-        return <img src={imgEditar} className='img-info-editar' alt='' onClick={editarUsuario}/>
-      }else{
-        return <div></div>
-      }
+    const btnEditarUsuario = ()=>{
+      return <img src={imgEditar} className='img-info-editar' alt='' onClick={editarUsuario}/>
     }
 
     const editarEmpresa = ()=>{
@@ -195,7 +192,11 @@ const Usuario = () => {
 
             <div className='div-info-personal'>
               <div className='div-info-empresa-img'>
-                <img src={empresa.img} className='img-info-empresa' alt='' />
+                <PhotoProvider>
+                  <PhotoView src={empresa.img}>
+                    <img src={empresa.img} className='img-info-empresa' alt='' />
+                  </PhotoView>
+                </PhotoProvider>
               </div>
               <div className='div-info-empresa-texto'>
                 <br/>
