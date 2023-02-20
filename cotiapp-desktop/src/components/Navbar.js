@@ -64,7 +64,7 @@ const Navbar = () => {
                 </div>
             }else{
                 return <div className='div-navbar-btns-small'>
-                <Link to='/agergar/cliente' className='link-navbar'>
+                <Link className='link-navbar' onClick={agregarCliente}>
                     <img src={imgAgregarCliente} className='btn-img-navbar' alt=''/>
                 </Link>
 

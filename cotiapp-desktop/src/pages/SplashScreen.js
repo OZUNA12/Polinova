@@ -11,6 +11,7 @@ const SplashScreen = () => {
     return (
         <div className='div-splash-scree-main'>
             <img src={logoCotiapp} alt='' className='img-splash-screen'/>
+            <p className='p-info-version'>CotiApp - Versión BETA 0.0.1</p>
         </div>
     )
 }

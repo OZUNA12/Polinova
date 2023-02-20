@@ -11,34 +11,44 @@
 }
 
 .img-splash-screen{
-    width: 250px;
+    width: 200px;
     animation-name: animacionLogo;
     animation-iteration-count: infinite;
-    animation-duration: 15s;
+    animation-duration: 10s;
     animation-direction: alternate-reverse;
     animation-timing-function: linear;
 }
 
 @keyframes animacionLogo {
     10%{
-        width: 250px;
+        width: 200px;
     }20%{
-        width: 275px;
+        width: 215px;
     }30%{
-        width: 250px;
+        width: 200px;
     }40%{
-        width: 275px;
+        width: 215px;
     }50%{
-        width: 250px;
+        width: 200px;
     }60%{
-        width: 275px;
+        width: 215px;
     }70%{
-        width: 250px;
+        width: 200px;
     }80%{
-        width: 275px;
+        width: 215px;
     }90%{
-        width: 250px;
+        width: 200px;
     }100%{
-        width: 275px;
+        width: 215px;
     }
+}
+
+.p-info-version{
+    position: fixed;
+    left: 10px;
+    bottom: 5px;
+    margin: 0px;
+    padding: 0px;
+    font-weight: bold;
+    font-size: 12px;
 }
