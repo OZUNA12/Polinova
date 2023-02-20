@@ -96,6 +96,8 @@
 .div-editar-empresa-label-p{
     display: flex;
     align-items: center;
+    width: 100%;
+    justify-content: center;
 }
 
 .hide{

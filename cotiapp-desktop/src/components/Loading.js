@@ -11,6 +11,7 @@ const Loading = () => {
     spinner
     text='Cargando contenido...'
     >
+      <p className='p-loading-info'>Si el contenido no carga, intente recargar la pestaña</p>
     </LoadingOverlay>
 }
 

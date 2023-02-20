@@ -105,8 +105,14 @@ const AgregarCliente = ({id}) => {
         document.getElementById('agregar-cliente').style.display = 'none';
     }
 
+    const dispose = (e)=>{
+        if(e.target.id === 'agregar-cliente'){
+            document.getElementById('agregar-cliente').style.display = 'none';
+        }
+    }
+
     return (
-        <div className='agregar-cliente' id='agregar-cliente'>
+        <div className='agregar-cliente' id='agregar-cliente' onClick={dispose}>
             <form onSubmit={submit} className='form-agregar-cliente'>
                 <br/>
                 <div className='div-titulo-agregar-cliente'>

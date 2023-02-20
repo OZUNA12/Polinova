@@ -3,3 +3,30 @@
     width: 100%;
     height: 100vh;
 }
+
+.p-loading-info{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    top: 20px;
+    left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 90px;
+    color: gray;
+
+    z-index: 289;
+    animation-name: p-loading-info;
+    animation-duration: 15s;
+}
+
+@keyframes p-loading-info{
+    0%{
+        opacity: 0%;
+    }50%{
+        opacity: 100%;
+    }
+    
+}

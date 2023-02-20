@@ -1,0 +1,9 @@
+.img-logo-empresa-index{
+    width: 250px;
+    height: 100px;
+    object-fit: contain;
+    position: fixed;
+    top: 55px;
+    left: 0px;
+    cursor: pointer;
+}

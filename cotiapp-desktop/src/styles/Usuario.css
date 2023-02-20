@@ -112,3 +112,21 @@
     filter: invert(.3);
 }
 
+.warning-animation:hover{
+    animation-name: warning-animation;
+    animation-timing-function: ease-out;
+    animation-duration: 200ms;
+
+}
+
+@keyframes warning-animation {
+    25%{
+        transform: translateX(-5px);
+    }50%{
+        transform: translateX(5px);
+    }75%{
+        transform: translateX(-5px);
+    }100%{
+        transform: translateX(5px);
+    }
+}

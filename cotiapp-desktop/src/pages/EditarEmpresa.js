@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom'
 import Titulo from '../components/Titulo';
 import axios from 'axios';
 import backend from '../constants';
 import sweetalert2 from 'sweetalert2';
 import Label from '../components/Label';
 import { PhotoProvider, PhotoView } from 'react-image-previewer';
-
 
 import '../styles/EditarEmpresa.css'
 import Loading from '../components/Loading';
@@ -90,7 +90,7 @@ const EditarEmpresa = () => {
       formData.append('correo', newEmpresa.correo);
       formData.append('telefono', newEmpresa.telefono);
       formData.append('pagina', newEmpresa.pagina);
-      formData.append('nombrecondiciones', newEmpresa.nombrecondiciones);
+      formData.append('condiciones', newEmpresa.condiciones);
       formData.append('footer', newEmpresa.footer);
 
       if(img.value === ''){
@@ -137,6 +137,7 @@ const EditarEmpresa = () => {
           icon: 'success',
           title: 'Informacion actualizada!'
         })
+        
       }else{
         document.getElementById('btn1').disabled = false;
 
@@ -273,6 +274,7 @@ const EditarEmpresa = () => {
             </div>
 
             <div className='div-input-editar-empresa'>
+              <Label htmlFor='input-img'>Seleccione una imagen (De preferencia con fondo blanco o transparente):</Label>
               <div className='div-editar-empresa-label-p'>
                 <label htmlFor='input-img' className='boton1'>Seleccionar Imagen </label>
                 <p className='label-p-editar-empresa'>{imgName}</p>
@@ -298,7 +300,7 @@ const EditarEmpresa = () => {
               <input
                 className='boton1 btn-editar-empresa-cancelar'
                 type='reset'
-                value='Cancelar'
+                value='Volver'
 
                 onClick={cancelar}
               />

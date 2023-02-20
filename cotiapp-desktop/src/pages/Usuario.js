@@ -3,9 +3,7 @@ import Titulo from '../components/Titulo';
 import axios from 'axios';
 import backend from '../constants';
 import sweetalert2 from 'sweetalert2';
-import { Link } from 'react-router-dom';
 import Loading from '../components/Loading';
-import Boton1 from '../components/Boton1';
 import { PhotoProvider, PhotoView } from 'react-image-previewer';
 
 import imgUsuarioNormal from '../assets/usuario-normal.png';
@@ -164,6 +162,24 @@ const Usuario = () => {
       window.location.href = '/editar/usuario';
     }
 
+    const cerrarSesion = ()=>{
+      sweetalert2.fire({
+        title: '¿Quieres cerrar tu sesión?',
+        color: 'black',
+        icon: 'warning',
+        iconColor: '#F5305C',
+        showCancelButton: true,
+        confirmButtonColor: '#F5305C',
+        cancelButtonColor: '#04BEC7',
+        confirmButtonText: 'Si, cerrar sesión',
+        cancelButtonText: 'Cancelar'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.href = '/logout';
+        }
+      })
+    }
+
     if(usuario._id === undefined){
       return <Loading/>
     }else{
@@ -216,8 +232,7 @@ const Usuario = () => {
 
             <br/>
 
-
-            <Link to='/logout'><Boton1>Cerrar Sesión</Boton1></Link>
+            <button onClick={cerrarSesion} className='warning-animation boton1'>Cerrar Sesión</button>
             <br/>
         </div>
       )

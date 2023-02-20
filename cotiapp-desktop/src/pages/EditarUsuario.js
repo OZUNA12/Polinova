@@ -244,7 +244,7 @@ const EditarUsuario = () => {
               <input
                 className='boton1 btn-editar-empresa-cancelar'
                 type='reset'
-                value='Cancelar'
+                value='Volver'
 
                 onClick={cancelar}
               />

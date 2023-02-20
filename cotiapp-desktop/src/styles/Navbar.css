@@ -41,14 +41,43 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 125px;
+    width: 155px;
     height: fit-content;
+    margin-right: 7.5px;
 }
 
 .div-navbar-btns-small{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    width: 83.3px;
+    width: 125px;
     height: fit-content;
+    margin-right: 7.5px;
 }
+
+.p-info-navbar-icon{
+    position: fixed;
+    right: 0px;
+    top: 50px;
+    background-color: gray;
+    color: white;
+    font-size: 12px;
+    margin: 0px;
+    padding: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.p-home-navbar-icon{
+    position: fixed;
+    left: 0px;
+    top: 50px;
+    background-color: gray;
+    color: white;
+    font-size: 12px;
+    margin: 0px;
+    padding: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
