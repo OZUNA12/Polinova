@@ -94,7 +94,7 @@ const Usuario = () => {
 
         case imgUsuarioDios: 
           sweetalert2.fire({
-            icon: 'question',
+            icon: 'info',
             iconColor: '#FFBF00',
             title: 'Desarrollador',
             text: 'Eres un Desarrollador, tienes acceso total al sistema',
@@ -106,7 +106,7 @@ const Usuario = () => {
 
           case imgUsuarioAdmin: 
           sweetalert2.fire({
-            icon: 'question',
+            icon: 'info',
             iconColor: '#42e8ff',
             title: 'Administrador',
             text: 'Eres un Administrador, puedes crear cuentas nuevas en tu empresa, recuperar, eliminar y editar cuentas, editar información de tu empresa, designar nuevos administradores o moderadores',
@@ -118,7 +118,7 @@ const Usuario = () => {
           
           case imgUsuarioModerador: 
             sweetalert2.fire({
-              icon: 'question',
+              icon: 'info',
               title: 'Moderador',
               iconColor: '#990000',
               text: 'Eres un Moderador, puedes crear cuentas nuevas en tu empresa, recuperar y editar cuentas',
@@ -130,7 +130,7 @@ const Usuario = () => {
           
           case imgUsuarioNormal: 
           sweetalert2.fire({
-            icon: 'question',
+            icon: 'info',
             title: 'Normal',
             iconColor: '#000',
             text: 'Eres un usuario regular, no tienes privilegios especiales',

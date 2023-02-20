@@ -6,8 +6,9 @@ import Loading from '../components/Loading';
 import Titulo from '../components/Titulo';
 import Label from '../components/Label';
 
-const EditarUsuario = () => {
+import '../styles/Toast.css'
 
+const EditarUsuario = () => {
 
     const [usuario, setUsuario] = useState({});
     const [newUsuario, setNewUsuario] = useState({});
@@ -98,7 +99,27 @@ const EditarUsuario = () => {
             });
           
             if(data._id !== undefined){
-              window.location.href = '/usuario';
+
+              const Toast = sweetalert2.mixin({
+                toast: true,
+                position: 'bottom-right',
+                iconColor: 'white',
+                customClass: {
+                  popup: 'colored-toast'
+                },
+                showConfirmButton: false,
+                showCloseButton: true,
+                timer: 4000,
+                timerProgressBar: true
+              })
+
+              document.getElementById('btn1').disabled = false;
+
+
+              Toast.fire({
+                icon: 'success',
+                title: 'Informacion actualizada!'
+              })
             }else{
               document.getElementById('btn1').disabled = false;
       

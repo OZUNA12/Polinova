@@ -3,7 +3,6 @@ import Titulo from '../components/Titulo';
 import axios from 'axios';
 import sweetalert2 from 'sweetalert2';
 import backend from '../constants';
-import AgregarCliente from '../components/AgregarCliente';
 import CrearCotizacion from '../components/CrearCotizacion';
 import Loading from '../components/Loading';
 
@@ -45,7 +44,6 @@ const Index = () => {
             <Titulo>Hola {usuario.nombre}</Titulo>
   
             <CrearCotizacion/>
-            <AgregarCliente/>
         </div>
       )
     }

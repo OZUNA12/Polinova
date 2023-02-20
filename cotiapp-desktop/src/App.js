@@ -11,6 +11,7 @@ import DiosRoute from './routes/DiosRoute';
 import AdminRoute from './routes/AdminRoute';
 import ModeradorRoute from './routes/ModeradorRoute';
 import EditarUsuario from './pages/EditarUsuario';
+import SplashScreen from './pages/SplashScreen';
 
 function App() {
   return (
@@ -19,7 +20,8 @@ function App() {
       <NavbarHidden/>
       <div>
         <Routes>
-          <Route path='/' element={<LoggedRoute><Index/></LoggedRoute>}/>
+          <Route path='/' element={<SplashScreen/>}/>
+          <Route path='/home' element={<LoggedRoute><Index/></LoggedRoute>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/logout' element={<Logout/>}/>
           <Route path='/usuario' element={<LoggedRoute><Usuario/></LoggedRoute>}/>

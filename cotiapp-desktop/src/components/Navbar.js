@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import backend from '../constants';
+import AgregarCliente from './AgregarCliente';
 
 import '../styles/Navbar.css';
 
@@ -39,10 +40,11 @@ const Navbar = () => {
             }
           }
       }
-
-
     });
 
+    const agregarCliente = ()=>{
+        document.getElementById('agregar-cliente').style.display = 'flex'
+    }
     
     const botones = ()=>{
         if(localStorage.getItem('id') !== null){
@@ -52,7 +54,7 @@ const Navbar = () => {
                         <img src={imgTuerquita} className='btn-img-navbar' alt=''/>
                     </Link>
 
-                    <Link to='/agergar/cliente' className='link-navbar'>
+                    <Link className='link-navbar' onClick={agregarCliente}>
                         <img src={imgAgregarCliente} className='btn-img-navbar' alt=''/>
                     </Link>
 
@@ -77,7 +79,8 @@ const Navbar = () => {
 
     return (
         <div className='navbar'>
-            <Link to='/'  className='link-navbar'>
+            <AgregarCliente id='agregar-cliente'/>
+            <Link to='/home'  className='link-navbar'>
                 <img src={imgLogo} className='logo-navbar' alt=''/>
             </Link>
             {

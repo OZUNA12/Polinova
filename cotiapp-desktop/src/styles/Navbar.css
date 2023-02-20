@@ -19,9 +19,17 @@
     top: 5px;
 }
 
+.logo-navbar:hover{
+    filter: invert(15%);
+}
+
 .btn-img-navbar{
     height: 30px;
     display: block;
+}
+
+.btn-img-navbar:hover{
+    filter: invert(15%);
 }
 
 .link-navbar{

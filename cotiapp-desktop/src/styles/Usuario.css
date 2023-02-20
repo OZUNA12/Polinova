@@ -46,6 +46,10 @@
     cursor: pointer;
 }
 
+.img-info-usuario:hover{
+    filter: invert(5%);
+}
+
 .img-info-empresa{
     width: 95%;
     height: 90%;
@@ -56,6 +60,10 @@
     background-color: white;
 
     cursor: pointer;
+}
+
+.img-info-empresa:hover{
+    filter: invert(10%);
 }
 
 .div-info-empresa-img{

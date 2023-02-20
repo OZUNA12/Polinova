@@ -88,6 +88,11 @@
     object-fit: contain;
     cursor: pointer;
 }
+
+.img-editar-empresa:hover{
+    filter: invert(10%);
+}
+
 .div-editar-empresa-label-p{
     display: flex;
     align-items: center;

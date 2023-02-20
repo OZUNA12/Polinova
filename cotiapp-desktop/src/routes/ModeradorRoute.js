@@ -6,11 +6,10 @@ export default function LoggedRoute({ children }) {
     
     useEffect(()=>{
       const getUsuario = async()=>{
-        console.log('get usuario')
         const {data} = await axios.get(backend()+'/api/usuario/'+localStorage.getItem('id'))
 
         if(!data.admin && !data.dios && !data.moderador){
-            window.location.href = '/'
+            window.location.href = '/home'
         }
 
       }

@@ -89,7 +89,7 @@ const Login = () => {
             })
         if(data.exito){
             localStorage.setItem('id', data.id);
-            window.location.href = '/';
+            window.location.href = '/home';
         }else{
             document.getElementById('btn1').disabled = false;
 
