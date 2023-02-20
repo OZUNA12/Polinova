@@ -114,6 +114,7 @@ const EditarUsuario = () => {
               })
 
               document.getElementById('btn1').disabled = false;
+              document.getElementById('act_pass').value = '';
 
 
               Toast.fire({

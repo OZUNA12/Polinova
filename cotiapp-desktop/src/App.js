@@ -12,6 +12,7 @@ import AdminRoute from './routes/AdminRoute';
 import ModeradorRoute from './routes/ModeradorRoute';
 import EditarUsuario from './pages/EditarUsuario';
 import SplashScreen from './pages/SplashScreen';
+import EditarCliente from './pages/EditarCliente';
 
 function App() {
   return (
@@ -27,7 +28,7 @@ function App() {
           <Route path='/usuario' element={<LoggedRoute><Usuario/></LoggedRoute>}/>
           <Route path='/editar/empresa' element={<AdminRoute><EditarEmpresa/></AdminRoute>}/>
           <Route path='/editar/usuario' element={<EditarUsuario/>}/>
-
+          <Route path='/editar/cliente' element={<EditarCliente/>}/>
 
 
         </Routes>
