@@ -1,5 +1,5 @@
 const backend = ()=>{
-    return 'http://localhost:4000'
+    return 'https://cotiapp.onrender.com'
 }
 
 module.exports = backend;
