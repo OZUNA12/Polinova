@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom'
 import Titulo from '../components/Titulo';
 import axios from 'axios';
 import backend from '../constants';
@@ -90,6 +89,7 @@ const EditarEmpresa = () => {
       formData.append('correo', newEmpresa.correo);
       formData.append('telefono', newEmpresa.telefono);
       formData.append('pagina', newEmpresa.pagina);
+      formData.append('direccion', newEmpresa.direccion);
       formData.append('condiciones', newEmpresa.condiciones);
       formData.append('footer', newEmpresa.footer);
 
@@ -246,6 +246,19 @@ const EditarEmpresa = () => {
                   onChange={cambiarValor}
                 />
               </div>
+
+              <div className='div-input-editar-empresa'>
+              <Label>Dirección de la empresa:</Label>
+              <textarea
+                className='text-area-editar-empresa'
+                value={newEmpresa.direccion}
+                name='direccion'
+                placeholder='Dirección de la empresa'
+                required
+
+                onChange={cambiarValor}
+              />
+            </div>
 
             <div className='div-input-editar-empresa'>
               <Label>Condiciones de Servicio:</Label>

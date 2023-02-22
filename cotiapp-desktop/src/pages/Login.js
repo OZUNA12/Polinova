@@ -3,7 +3,6 @@ import axios from 'axios';
 import sweetalert2 from 'sweetalert2';
 import backend from '../constants';
 import Titulo from '../components/Titulo';
-import Boton1 from '../components/Boton1';
 import Label from '../components/Label';
 
 import ojoAbierto from '../assets/ojo.png';
@@ -89,7 +88,26 @@ const Login = () => {
             })
         if(data.exito){
             localStorage.setItem('id', data.id);
-            window.location.href = '/home';
+
+            const res = await axios.get(backend()+'/api/usuario/'+data.id)
+                
+            if(res.data.telefono === password){
+                sweetalert2.fire({
+                    icon: 'warning',
+                    iconColor: 'red',
+                    title: '¡¡¡Atención!!!',
+                    text: 'Tienes la contraseña por defecto. Te sugerimos cambiarla lo antes posible para evitar que usen tu cuenta indebidamente',
+                    color: 'black',
+                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: '#F5305C',
+                }).then((res)=>{
+                    window.location.href = '/home'
+
+                })
+            }else{
+                window.location.href = '/home';
+            }
+
         }else{
             document.getElementById('btn1').disabled = false;
 

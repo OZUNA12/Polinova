@@ -119,7 +119,7 @@ const Usuario = () => {
               icon: 'info',
               title: 'Moderador',
               iconColor: '#990000',
-              text: 'Eres un Moderador, puedes crear cuentas nuevas en tu empresa, recuperar y editar cuentas',
+              text: 'Eres un Moderador, puedes recuperar cuentas',
               color: 'black',
               confirmButtonText: 'Aceptar',
               confirmButtonColor: '#F5305C'

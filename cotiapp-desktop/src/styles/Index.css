@@ -6,4 +6,6 @@
     top: 55px;
     left: 0px;
     cursor: pointer;
+
+    z-index: -5;
 }

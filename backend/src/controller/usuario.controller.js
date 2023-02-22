@@ -20,7 +20,7 @@ ctrl.crear = async(req, res)=>{
         } = req.body;
 
     const usuarios = await Usuario.find();
-    const band = true;
+    var band = true;
     usuarios.map((u)=>{
         if(u.correo == correo){
             band = false;

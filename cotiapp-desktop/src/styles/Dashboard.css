@@ -1,0 +1,79 @@
+.div-dashboard-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.div-map-usuarios{
+    width: 80%;
+    background-color: #63CCD1;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    padding: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+
+    box-shadow: -5px 5px rgba(0,0,0,.5);
+}
+
+.h1-dashboard-nombre{
+    cursor: pointer;
+    padding: 0px;
+    margin: 0px;
+    font-size: 35px;
+    margin-bottom: 10px;
+    width: 50%;
+}
+
+.p-dashboard-usuario{
+    padding: 0px;
+    margin: 0px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+
+}
+
+.span-dashboard-usuario{
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.div-dashboard-btns{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    flex-direction: column;
+    width: 25%;
+    padding-right: 50px;
+}
+
+.div-dashboard-titulo{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.img-dashboard-logo-empresa{
+    display: block;
+    height: 100px;
+    cursor: pointer;
+    width: 25%;
+    object-fit: contain;
+}
+
+.a-dashboard{
+    color: #004368;
+}
+
+.pre-chikito{
+    font-size: 3px;
+}
+
+.btn-dashboard-izq{
+    width: 210px;
+}
