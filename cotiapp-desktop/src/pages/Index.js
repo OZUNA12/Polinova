@@ -69,7 +69,7 @@ const Index = () => {
     }else{
       return (
         <div>
-            <Titulo>Hola {usuario.nombre}</Titulo>
+            <h1 className='titulo h1-index-titulo'>Hola {usuario.nombre}</h1>
             <PhotoProvider>
               <PhotoView src={empresa.img}>   
                 <img src={empresa.img} alt='' className='img-logo-empresa-index'/>

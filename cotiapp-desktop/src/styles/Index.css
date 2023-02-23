@@ -7,5 +7,15 @@
     left: 0px;
     cursor: pointer;
 
-    z-index: -5;
+    z-index: -2;
+}
+
+.h1-index-titulo{
+    top: 50px;
+    left: 0px;
+    position: fixed;
+    width: 100%;
+    text-align: center;
+
+    z-index: -3;
 }

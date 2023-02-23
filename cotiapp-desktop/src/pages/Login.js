@@ -59,6 +59,23 @@ const Login = () => {
     const login = async(e)=>{
         e.preventDefault();
 
+        const toast = sweetalert2.mixin({
+            toast: true,
+            position: 'center',
+            iconColor: 'white',
+            customClass: {
+              popup: 'colored-toast'
+            },
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true
+          })
+
+          toast.fire({
+            icon: 'info',
+            title: 'Iniciando sesión, espere un momento'
+          })
+
         document.getElementById('btn1').disabled = true;
         
 
