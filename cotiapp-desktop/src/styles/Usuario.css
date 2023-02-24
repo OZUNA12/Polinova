@@ -9,6 +9,7 @@
     border-radius: 10px;
     background-color: #63CCD1;
     width: 80%;
+    box-shadow: -5px 5px rgba(0,0,0,.5);
 
     display: flex;
 }

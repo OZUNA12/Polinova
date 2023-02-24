@@ -4,17 +4,17 @@ import sweetalert2 from 'sweetalert2';
 import backend from '../constants';
 import { PhotoProvider, PhotoView } from 'react-image-previewer';
 import Loading from '../components/Loading';
+import Titulo from '../components/Titulo';
 
-import '../styles/Index.css'
-import CrearCotizacion from '../components/CrearCotizacion';
+import '../styles/ListaClientes.css'
 
-const Index = () => {
+const Listaclientess = () => {
 
-  const [usuario, setUsuario] = useState({});
-  const [empresa, setEmpresa] = useState({});
+    const [usuario, setUsuario] = useState({});
+    const [clientes, setClientes] = useState([]);
 
-    const getEmpresa = async()=>{
-      const {data} = await axios.get(backend()+'/api/empresa/'+usuario.id_empresa)
+    const getclientes = async()=>{
+      const {data} = await axios.get(backend()+'/api/cliente/')
         .catch((err)=>{
           console.log(err)
           sweetalert2.fire({
@@ -29,8 +29,17 @@ const Index = () => {
           })
 
           return;
+        });
+
+        const aux = [];
+        data.map((d)=>{
+            if(d.id_usuario === usuario._id){
+                aux.push(d);
+            }
         })
-      setEmpresa(data);
+
+        console.log(aux)
+        setClientes(aux);
     }
     
     useEffect(()=>{
@@ -56,50 +65,33 @@ const Index = () => {
 
       if(usuario._id === undefined){
         getUsuario();
-      }else{
-        
-        if(empresa._id === undefined){
-          getEmpresa();
+      }else{        
+        if(clientes.length === 0){
+          getclientes();
         }
       }
     });
-    
+
     if(usuario._id === undefined){
-      return <Loading/>
+        return <Loading/>
     }else{
-      return (
-        <div>
-            <div className='div-index-header'>
-
-            <div className='div-index-header-item-lados'>
-              <PhotoProvider>
-                <PhotoView src={empresa.img}>   
-                  <img src={empresa.img} alt='' className='img-logo-empresa-index'/>
-                </PhotoView>
-              </PhotoProvider>
+        return (
+            <div className='div-lista-cliente-main'>
+                <Titulo>Mis clientes</Titulo>
+                {
+                    clientes.map((c)=>{
+                        return <div className='div-lista-clientes-cliente'>
+                            <h3 className='h3-lista-clientes'>{c.nombre} </h3>
+                            <p className='p-lista-clientes'>{c.empresa} </p>
+                            <a className='a-lista-clientes' href={'mailto:'+c.correo}>{c.correo} </a>
+                            <br/>
+                            <a className='a-lista-clientes' href={'callto:'+c.telefono}>{c.telefono} </a>
+                        </div>
+                    })
+                }
             </div>
-
-              <div className='div-index-header-item-centro'>
-                <h1 className='titulo h1-index-titulo'>Hola {usuario.nombre}</h1>
-              </div>
-
-              <div className='div-index-header-item-lados'>
-                <button className='boton1 btn-index-clientes-margen' onClick={()=>window.location.href = '/lista/clientes'}>Ver mis clientes</button>
-              </div>
-
-            </div>
-
-
-            <CrearCotizacion/>
-            <br/>
-            <br/>
-        </div>
-
-        
-      )
+        )
     }
-
-    
 }
 
-export default Index
+export default Listaclientess

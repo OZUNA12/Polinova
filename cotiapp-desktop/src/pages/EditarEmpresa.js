@@ -92,6 +92,8 @@ const EditarEmpresa = () => {
       formData.append('direccion', newEmpresa.direccion);
       formData.append('condiciones', newEmpresa.condiciones);
       formData.append('footer', newEmpresa.footer);
+      formData.append('color', newEmpresa.color);
+
 
       if(img.value === ''){
       }else{
@@ -284,6 +286,19 @@ const EditarEmpresa = () => {
 
                 onChange={cambiarValor}
               />
+            </div>
+
+            <div className='div-input-color'>
+              <Label>Color Principal: </Label>
+              <input
+                className='input-color'
+                type='color'
+                value={newEmpresa.color}
+                name='color'
+                required
+
+                onChange={cambiarValor}
+                />
             </div>
 
             <div className='div-input-editar-empresa'>

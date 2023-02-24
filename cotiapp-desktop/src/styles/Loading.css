@@ -25,7 +25,9 @@
 @keyframes p-loading-info{
     0%{
         opacity: 0%;
-    }50%{
+    }90%{
+        opacity: 75%;
+    }100%{
         opacity: 100%;
     }
     

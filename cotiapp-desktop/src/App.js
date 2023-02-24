@@ -17,6 +17,7 @@ import Dashboard from './pages/Dashboard';
 import EditarOtroUsuario from './pages/EditarOtroUsuario';
 import AgregarEmpresa from './pages/AgregarEmpresa';
 import AgregarUsuario from './routes/AgregarUsuario';
+import ListaClientes from './pages/ListaClientes';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
           <Route path='/dashboard' element={<ModeradorRoute><Dashboard/></ModeradorRoute>}/>
           <Route path='/agregar/empresa' element={<DiosRoute><AgregarEmpresa/></DiosRoute>}/>
           <Route path='/agregar/usuario' element={<AdminRoute><AgregarUsuario/></AdminRoute>}/>
+          <Route path='/lista/clientes' element={<LoggedRoute><ListaClientes/></LoggedRoute>} />
 
 
         </Routes>

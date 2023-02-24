@@ -9,7 +9,8 @@ const schema = new Schema({
     folio_coti: {type: Number, required: true},    
     folio_ticket: {type: Number, required: true},
     condiciones:  {type: String, required: false},
-    footer:  {type: String, required: false},
+    footer: {type: String, required: false},
+    color: {type: String, required: false},
 
     img: {type: String, required: true},
     activo: {type: Boolean, default: true}

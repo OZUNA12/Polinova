@@ -52,6 +52,8 @@ const AgregarEmpresa = () => {
         formData.append('folio_ticket', newEmpresa.folio_ticket);
         formData.append('condiciones', newEmpresa.condiciones);
         formData.append('footer', newEmpresa.footer);
+        formData.append('color', newEmpresa.color);
+
         formData.append("img", img.files[0]);        
         
   
@@ -224,7 +226,7 @@ const AgregarEmpresa = () => {
                 <Label>Folio de Cotización inicial:</Label>
                 <input
                 className='input-editar-empresa-completo'
-                type='text'
+                type='number'
                 value={newEmpresa.folio_coti}
                 name='folio_coti'
                 placeholder='Folio de Cotización inicial'
@@ -238,7 +240,7 @@ const AgregarEmpresa = () => {
                 <Label>Folio de Ticket inicial:</Label>
                 <input
                 className='input-editar-empresa-completo'
-                type='text'
+                type='number'
                 value={newEmpresa.folio_ticket}
                 name='folio_ticket'
                 placeholder='Folio de Ticket inicial'
@@ -276,6 +278,19 @@ const AgregarEmpresa = () => {
                   onChange={cambiarValor}
                 />
               </div>
+
+            <div className='div-input-color'>
+              <Label>Color Principal: </Label>
+              <input
+                className='input-color'
+                type='color'
+                value={newEmpresa.color}
+                name='color'
+                required
+
+                onChange={cambiarValor}
+                />
+            </div>
   
               <div className='div-input-editar-empresa'>
                 <Label htmlFor='input-img'>Seleccione una imagen (De preferencia con fondo blanco o transparente):</Label>

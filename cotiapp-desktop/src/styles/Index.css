@@ -1,21 +1,39 @@
+.div-index-header{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .img-logo-empresa-index{
-    width: 20%;
+    width: 100%;
     height: 100px;
     object-fit: contain;
-    position: fixed;
-    top: 55px;
-    left: 0px;
-    cursor: pointer;
 
-    z-index: -2;
+    cursor: pointer;
 }
 
 .h1-index-titulo{
-    top: 50px;
-    left: 0px;
-    position: fixed;
     width: 100%;
     text-align: center;
+}
 
-    z-index: -3;
+.div-index-header-item-centro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 70%;
+}
+
+.div-index-header-item-lados{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 100%;
+    width: 15%;
+}
+
+.btn-index-clientes-margen{
+    margin-right: 15px;
 }

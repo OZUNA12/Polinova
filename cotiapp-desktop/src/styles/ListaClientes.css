@@ -1,0 +1,47 @@
+.div-lista-cliente-main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.div-lista-clientes-cliente{
+    width: 60%;
+    background-color: #63CCD1;
+    border-radius: 10px;
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: -5px 5px rgba(0,0,0,.5);
+
+    margin-bottom: 20px;
+    
+    cursor: pointer;
+}
+
+.h3-lista-clientes{
+    font-size: 20px;
+    padding: 0px;
+    margin: 0px;
+    padding-bottom: 10px;
+    cursor: pointer;
+
+}
+
+.p-lista-clientes{
+    font-size: 15px;
+    padding: 0px;
+    margin: 0px;
+    cursor: pointer;
+
+}
+
+.a-lista-clientes{
+    font-size: 15px;
+    padding: 0px;
+    margin: 0px;
+    cursor: pointer;
+
+    color: #004368;
+
+}

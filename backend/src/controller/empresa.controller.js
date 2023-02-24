@@ -24,6 +24,7 @@ ctrl.crear = async(req, res)=>{
             direccion,
             folio_coti,    
             folio_ticket,
+            color,
             condiciones,
             footer
     } = req.body;
@@ -37,6 +38,7 @@ ctrl.crear = async(req, res)=>{
         folio_coti,    
         folio_ticket,
         condiciones,
+        color,
         footer,
         img: result.url
     });
@@ -90,6 +92,7 @@ ctrl.actualizar = async(req, res)=>{
         pagina,
         direccion,
         condiciones,
+        color,
         footer
     } = req.body;
         const empresa = await Empresa.findByIdAndUpdate(id, {
@@ -99,6 +102,7 @@ ctrl.actualizar = async(req, res)=>{
             pagina,
             direccion,
             condiciones,
+            color,
             footer
         }).catch(err=>{
             res.json(err);
@@ -112,6 +116,7 @@ ctrl.actualizar = async(req, res)=>{
             pagina,
             direccion,
             condiciones,
+            color,
             footer
         }).catch(err=>{
             res.json(err);
@@ -131,6 +136,7 @@ ctrl.actualizar = async(req, res)=>{
             pagina,
             direccion,
             condiciones,
+            color,
             footer,
             img: result.url
         }).catch(err=>{
