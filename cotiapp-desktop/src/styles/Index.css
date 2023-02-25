@@ -37,3 +37,42 @@
 .btn-index-clientes-margen{
     margin-right: 15px;
 }
+
+.div-index-coti-ticket{
+    width: 80%;
+    margin: auto;
+}
+
+.div-index-btns{
+    width: 100%;
+    float: left;
+}
+
+.btn-index{
+    width: 50%;
+    float: left;
+    height: 50px;
+    background-color: #63CCD1;
+    font-size: 17.5px;
+    border: none;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.btn-index-left{
+    border-top-left-radius: 20px;
+}
+
+.btn-index-right{
+    border-top-right-radius: 20px;
+}
+
+.btn-inactive{
+    background-color: white;
+}
+
+.btn-inactive:hover{
+    background-color: rgb(235, 235, 235);
+    text-decoration: underline;
+}

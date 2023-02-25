@@ -7,11 +7,16 @@ import Loading from '../components/Loading';
 
 import '../styles/Index.css'
 import CrearCotizacion from '../components/CrearCotizacion';
+import CrearTicket from '../components/CrearTicket';
 
 const Index = () => {
 
   const [usuario, setUsuario] = useState({});
   const [empresa, setEmpresa] = useState({});
+  const [classBtnC, setClassBtnC] = useState('');
+  const [classBtnT, setClassBtnT] = useState('btn-inactive');
+  const [dispCoti, setDispCoti] = useState('');
+  const [dispTicket, setDispTicket] = useState('hidden');
 
     const getEmpresa = async()=>{
       const {data} = await axios.get(backend()+'/api/empresa/'+usuario.id_empresa)
@@ -63,6 +68,20 @@ const Index = () => {
         }
       }
     });
+
+    const cambiarTicket = ()=>{
+      setClassBtnT('');
+      setClassBtnC('btn-inactive');
+      setDispCoti('hidden');
+      setDispTicket('');
+    }
+
+    const cambiarCoti = ()=>{
+      setClassBtnC('');
+      setClassBtnT('btn-inactive');
+      setDispCoti('');
+      setDispTicket('hidden');
+    }
     
     if(usuario._id === undefined){
       return <Loading/>
@@ -90,7 +109,17 @@ const Index = () => {
             </div>
 
 
-            <CrearCotizacion/>
+            <div className='div-index-coti-ticket'>
+              <div className='div-index-btns'>
+                <button className={'btn-index btn-index-left '+classBtnC} onClick={cambiarCoti}>Cotización</button>
+                <button className={'btn-index btn-index-right '+classBtnT} onClick={cambiarTicket}>Ticket</button>
+              </div>
+              <CrearCotizacion display={dispCoti}/>
+              <CrearTicket display={dispTicket}/>
+
+            </div>
+
+
             <br/>
             <br/>
         </div>

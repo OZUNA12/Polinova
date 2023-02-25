@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import Titulo from '../components/Titulo';
+import Titulo from './Titulo';
 import axios from 'axios';
 import sweetalert2 from 'sweetalert2';
 import backend from '../constants';
-import Label from '../components/Label'
+import Label from './Label'
 import { PhotoProvider, PhotoView } from 'react-image-previewer';
 
 import '../styles/CrearCotizacion.css'
@@ -13,14 +13,13 @@ import imgPlantillaCotizacion2 from '../assets/plantilla-cotizacion-2.jpg';
 import imgPlantillaCotizacion3 from '../assets/plantilla-cotizacion-3.jpg';
 import imgPlantillaCotizacion4 from '../assets/plantilla-cotizacion-4.jpg';
 
-const CrearCotizacion = ({display}) => {
+const CrearTicket = ({display}) => {
 
     const [usuario, setUsuario] = useState({});
     const [clientes, setClientes] = useState([]);
     const [idCliente, setIdCliente] = useState('');
     const [empresa, setEmpresa] = useState({});
     const [cotizacion, setCotizacion] = useState({});
-    const [items, setItems] = useState([{}]);
 
     const getEmpresa = async()=>{
         const {data} = await axios.get(backend()+'/api/empresa/'+usuario.id_empresa)
@@ -57,7 +56,6 @@ const CrearCotizacion = ({display}) => {
         setUsuario(data);
       }
 
-
       const getClientes = async()=>{
         const {data} = await axios.get(backend()+'/api/cliente');
         var aux = [];
@@ -70,14 +68,16 @@ const CrearCotizacion = ({display}) => {
         setIdCliente(aux[0]._id);
       }
 
+      if(usuario._id === undefined){
         getUsuario();
-        if(usuario._id !== undefined && empresa._id === undefined){
+      }else{
+        if(empresa._id === undefined){
             getEmpresa();    
         }
-        getClientes();
-      
+            if(clientes.length === 0)
+                getClientes();
+      }
     });
-
 
     const submit = async(e)=>{
         e.preventDefault();
@@ -93,75 +93,12 @@ const CrearCotizacion = ({display}) => {
     const cambiarValor = (e)=>{
         const {name, value} = e.target;
         setCotizacion({...cotizacion, [name]: value});
-    }
+      }
     
-    const cambiarValorItem = (index, e)=>{
-
-        const {name, value} = e.target;
-        const aux = items;
-        aux[index] = ({...aux[index], [name]: value});
-
-        setItems(aux)
-    
-    }
-
-    const agregarItem = ()=>{
-        const aux = items;
-        aux.push({
-
-        });
-
-        setItems(aux)
-    }
-
-    const eliminarItem = (index)=>{
-        if(items.length === 1){
-            const Toast = sweetalert2.mixin({
-                toast: true,
-                position: 'bottom-right',
-                iconColor: 'white',
-                customClass: {
-                  popup: 'colored-toast'
-                },
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true
-            })
-
-            Toast.fire({
-                icon: 'warning',
-                title: `No puedes borrar el unico articulo`
-            })
-        }else{
-            const Toast = sweetalert2.mixin({
-                toast: true,
-                position: 'bottom-right',
-                iconColor: 'white',
-                customClass: {
-                  popup: 'colored-toast'
-                },
-                showConfirmButton: false,
-                timer: 1500,
-                timerProgressBar: true
-            })
-    
-            const aux = items;
-            aux.splice(index, 1);
-    
-            setItems(aux);
-    
-            Toast.fire({
-                icon: 'success',
-                title: `Articulo #${index+1} eliminado`
-            })
-    
-        }
-    }
-
 
     return (
         <div className={'div-crear-cotizacion-main '+display}>
-            <h1>Crear Cotización</h1>
+            <h1>Crear Ticket</h1>
             <form onSubmit={submit} className='form-cotizacion'>
             
 
@@ -179,102 +116,6 @@ const CrearCotizacion = ({display}) => {
                         }
                     </select>
                 </div>
-
-
-
-                <br/><br/>
-                <Label><big>Articulos:</big></Label>
-
-
-
-                {
-                    items.map((i, index)=>{
-                        return <div className='div-item-container'>
-                            <Label>Articulo {index+1}: </Label>
-
-                            <div className='div-items-line-1'>
-                                <div className='div-item-cant'>
-                                    <Label>Cant.</Label>
-                                    <input
-                                        type='number'
-                                        className='input-item'
-                                        name='cantidad'
-                                        placeholder='Cantidad'
-                                        value={i.cantidad}
-                                        onChange={(e)=>cambiarValorItem(index, e)}
-
-                                        required
-                                    />
-                                </div>
-
-                                <div className='div-item-cant'>
-                                    <Label>Unidad</Label>
-                                    <input
-                                        type='text'
-                                        className='input-item'
-                                        name='unidad'
-                                        placeholder='Unidad'
-                                        value={i.unidad}
-                                        onChange={(e)=>cambiarValorItem(index, e)}
-
-                                        required
-                                    />
-                                </div>
-
-                                <div className='div-item-art'>
-                                    <Label>Articulo</Label>
-                                    <input
-                                        type='text'
-                                        className='input-item'
-                                        name='articulo'
-                                        placeholder='Articulo'
-                                        value={i.articulo}
-                                        onChange={(e)=>cambiarValorItem(index, e)}
-
-                                        required
-                                    />
-                                </div>
-
-                                <div className='div-item-pre'>
-                                    <Label>P. Unitario</Label>
-                                    <input
-                                        type='number'
-                                        className='input-item'
-                                        name='precioUnitario'
-                                        placeholder='Precio Unitario'
-                                        value={i.precioUnitario}
-                                        onChange={(e)=>cambiarValorItem(index, e)}
-
-                                        required
-                                    />
-                                </div>
-                            </div>
-                            <div className='div-items-line-2'>
-                                <textarea
-                                    className='text-area-coti'
-                                    placeholder='Descripción del articulo'
-                                    name='descripcion'
-                                    value={i.descripcion}
-                                    onChange={(e)=>cambiarValorItem(index, e)}
-
-                                    
-                                >
-                                </textarea>
-                            </div>
-
-                            {
-                                <input className='boton1 right' onClick={(e)=>eliminarItem(index)} type='reset' value='Eliminar'/>
-                            }
-                        </div>
-                    })
-                }
-                <input
-                    type='reset'
-                    className='boton1'
-                    value='Agregar Articulo'
-                    onClick={agregarItem}
-                />
-
                 
                 <br/>
 
@@ -474,4 +315,4 @@ const CrearCotizacion = ({display}) => {
     )
 }
 
-export default CrearCotizacion
+export default CrearTicket
