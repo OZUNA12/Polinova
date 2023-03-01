@@ -5,7 +5,7 @@ const schema = new Schema({
     cantidad: {type: Number, required: true},
     unidad: {type: String, required: true},
     articulo: {type: String, required: true},
-    descripcion: {type: String, required: true},
+    descripcion: {type: String, required: false},
     precioUnitario: {type: Number, required: true},
     importe: {type: Number, required: true},
     tipo: {type: String, required: true}

@@ -186,3 +186,21 @@
 .right{
     float: right;
 }
+
+.div-loading-cotizacion-main{
+    width: 100%;
+    height: 60vh;
+    background-color: #63CCD1;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+
+    margin: auto;
+    margin-top: 15px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.bar-loader{
+    margin-top: 200px;
+}

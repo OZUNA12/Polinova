@@ -15,28 +15,30 @@ ctrl.crear = async(req, res)=>{
         tipo
     } = req.body;
 
-    const newItem = new Item({
-        id_doc,
-        cantidad,
-        unidad,
-        articulo,
-        descripcion,
-        precioUnitario,
-        importe,
-        tipo
-    });
+    cantidad.map(async(i, index)=>{
+        const newItem = new Item({
+            id_doc: id_doc[index],
+            cantidad: cantidad[index],
+            unidad: unidad[index],
+            articulo: articulo[index],
+            descripcion: descripcion[index],
+            precioUnitario: precioUnitario[index],
+            importe: importe[index],
+            tipo: tipo[index]
+        });
 
-    var error = false;
-    await newItem.save()
+        var error = false;
+        await newItem.save()
         .catch(err => {
             res.json(err);
             console.log("ERROR: "+err); 
             error = true;
-        });
 
-    if(!error){
-        res.json(newItem);        
-    }
+            return
+        });
+    })
+    
+    res.json({exito: true})
 }
 
 //Obtener todos los Items
